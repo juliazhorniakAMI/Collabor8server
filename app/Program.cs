@@ -17,8 +17,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
-builder.Services.AddScoped<IRoleService,RoleService>();
-builder.Services.AddScoped<IRoleRepository,RoleRepository>();
+//builder.Services.AddScoped<IRoleService,RoleService>();
+//builder.Services.AddScoped<IRoleRepository,RoleRepository>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 var app = builder.Build();

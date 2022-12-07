@@ -7,7 +7,12 @@ namespace app.DLL.Models
 {
     public class Role
     {
+        public Role()
+        {
+           
+        }
         public int Id { get; set; }
         public string FullName { get; set; }
+       
     }
 }
