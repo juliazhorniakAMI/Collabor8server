@@ -17,30 +17,30 @@ namespace app.DLL.Repositories.Impl
         {
             Context = context;
         } 
-        public bool Add(TEntity entity)
+        public async Task<bool> Add(TEntity entity)
         {
             var item =  Context.Set<TEntity>().Add(entity);
-             Context.SaveChanges();
+            await Context.SaveChangesAsync();
             return true;
         }
 
-        public bool Update(TEntity entity)
+        public async Task<bool> Update(TEntity entity)
         {
             Context.Entry(entity).State = EntityState.Modified;
-             Context.SaveChanges();
+              await Context.SaveChangesAsync();
             return true;
         }
-        public bool Delete(TEntity entity)
+        public async Task<bool> Delete(TEntity entity)
         {
             var result = Context.Set<TEntity>().Remove(entity).Entity;
-             Context.SaveChanges();
+             await Context.SaveChangesAsync();
 
             return true;
         }
-        public TEntity GetById(TKey id)
+        public async Task<TEntity> GetById(TKey id)
         {
-            return  Context.Set<TEntity>()
-                .Find(id);
+            return  await Context.Set<TEntity>()
+                .FindAsync(id);
         }
     }
 }

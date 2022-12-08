@@ -7,9 +7,9 @@ namespace app.DLL.Repositories.Abstract
 {
     public interface IGenericKeyRepository<in TKey, TEntity>
     {
-        bool Add(TEntity entity);
-        bool Update(TEntity entity);
-        bool Delete(TEntity entity);
-        TEntity GetById(TKey id);
+        Task<bool> Add(TEntity entity);
+        Task<bool> Update(TEntity entity);
+        Task<bool> Delete(TEntity entity);
+        Task<TEntity> GetById(TKey id);
     }
 }

@@ -12,7 +12,7 @@ namespace app.DLL.Mapping
     {
         public RoleProfile()
         {
-            CreateMap<Role, RoleDTO>().ReverseMap();
+            CreateMap<User, UserDTO>().ReverseMap();
         }
     }
 }
