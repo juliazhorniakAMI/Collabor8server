@@ -35,9 +35,9 @@ namespace app.Sevices.Impl
                   return _Repository.GetC8orByUserId(userId);
                 }
             }
-        public Task<bool> UpdateC8or(Collabor8orDTO c8or,int c8orId)
+        public Task<bool> UpdateC8or(Collabor8orDTO c8or)
         {
-            return _Repository.UpdateC8or(c8or,c8orId);
+            return _Repository.UpdateC8or(c8or);
         }
     }
 }

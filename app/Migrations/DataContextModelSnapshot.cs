@@ -140,11 +140,9 @@ namespace app.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BackgroundSummary")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Resume")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("UserId")
@@ -167,11 +165,9 @@ namespace app.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BackgroundSummary")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Resume")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("UserId")
@@ -198,6 +194,10 @@ namespace app.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Ideas")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 

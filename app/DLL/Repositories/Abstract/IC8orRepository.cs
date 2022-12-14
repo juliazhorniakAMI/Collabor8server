@@ -10,7 +10,7 @@ namespace app.DLL.Repositories.Abstract
         bool CheckIfC8orCreated(int userId);
         Task<Collabor8orDTO> GetC8orByUserId(int userId);
         Task<bool> AddC8or(int userId);
-        Task<bool> UpdateC8or(Collabor8orDTO c8or,int c8orId);
+        Task<bool> UpdateC8or(Collabor8orDTO c8or);
 
     }
 }

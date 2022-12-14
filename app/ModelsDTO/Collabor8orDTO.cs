@@ -7,10 +7,11 @@ namespace app.ModelsDTO
 {
     public class Collabor8orDTO
     {
-        
+        public int Id { get; set; }
         public string Name {get;set;}
         public string? BackgroundSummary { get; set; }
         public string? Resume { get; set; }
+        
       
     }
 }

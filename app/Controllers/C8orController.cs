@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace app.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class C8orController : ControllerBase
     {
         private readonly IC8orService _c8orService;
@@ -25,12 +24,12 @@ namespace app.Controllers
         {
             return Ok(await _c8orService.GetC8orByUserId(id));
         }
-        [HttpPut("{id}",Name ="UpdateCollabor8orProfile")]
-        public async Task<ActionResult<bool>> UpdateC8or([FromBody]Collabor8orDTO c8or,int id)
+        
+        [HttpPut("UpdateCollabor8orProfile")]
+        public async Task<ActionResult<bool>> UpdateC8or([FromBody]Collabor8orDTO c8or)
         {
-            return Ok(await _c8orService.UpdateC8or(c8or,id));
+            return Ok(await _c8orService.UpdateC8or(c8or));
         }
-
       
     }
 }

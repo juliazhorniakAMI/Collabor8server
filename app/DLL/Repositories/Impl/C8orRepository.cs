@@ -31,9 +31,9 @@ namespace app.DLL.Repositories.Impl
              return _mapper.Map<Collabor8or, Collabor8orDTO>(await Context.Collabor8ors.Where(x => x.UserId == userId)
                 .Include(x => x.User).FirstAsync());
         }
-          public async Task<bool> UpdateC8or(Collabor8orDTO c8or,int c8orId)
+          public async Task<bool> UpdateC8or(Collabor8orDTO c8or)
         { 
-            var existingC8or =  Context.Collabor8ors.First(x => x.Id == c8orId);
+            var existingC8or =  Context.Collabor8ors.First(x => x.Id == c8or.Id);
             existingC8or.BackgroundSummary = c8or.BackgroundSummary;
             existingC8or.Resume = c8or.Resume;
             return await Update(existingC8or);
