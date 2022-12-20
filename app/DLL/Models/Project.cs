@@ -11,19 +11,17 @@ namespace app.DLL.Models
         {
             C8orRequsted4Project = new HashSet<C8orRequsted4Project>();
             C8orApplied4Project = new HashSet<C8orApplied4Project>();
-            ProjectFounder = new HashSet<ProjectFounder>();
+            Founders = new HashSet<Founder>();
             ProjectSkill = new HashSet<ProjectSkill>();
         }
         public int Id { get; set; }
-        public int PMId { get; set; }
         public string Name { get; set; }
         public string Purpose { get; set; }
         public string Ideas { get; set; }
         public string Contracts { get; set; }
-        public virtual PM PM {get;set;}
         public virtual ICollection<C8orRequsted4Project> C8orRequsted4Project { get; set; }
         public virtual ICollection<C8orApplied4Project> C8orApplied4Project { get; set; }
-        public virtual ICollection<ProjectFounder> ProjectFounder { get; set; }
+        public virtual ICollection<Founder> Founders { get; set; }
         public virtual ICollection<ProjectSkill> ProjectSkill { get; set; }
 
     }

@@ -8,12 +8,11 @@ using AutoMapper;
 
 namespace app.DLL.Mapping
 {
-    public class PMProfile:Profile
-    {
-        public PMProfile()
+    public class PostOtherFounders:Profile
+    {     
+           public PostOtherFounders()
         {
-              CreateMap<PM,PMDTO>()
-                .ForMember(r => r.Name, s => s.MapFrom(t => t.User.Name));
+              CreateMap<PostOtherFoundersDTO,Founder>().ReverseMap();                  
         }
     }
 }

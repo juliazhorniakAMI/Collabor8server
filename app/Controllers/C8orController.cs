@@ -19,16 +19,27 @@ namespace app.Controllers
         }
         
         [HttpGet("{id}",Name ="GetCollabor8orProfile")]
-       
-        public async Task<ActionResult<ServiceResponse<Collabor8orDTO>>> GetC8or(int id)
+        public async Task<ActionResult<ServiceResponse<List<Collabor8orDTO>>>> GetC8orsByUserId(int id)
         {
-            return Ok(await _c8orService.GetC8orByUserId(id));
+            return Ok(await _c8orService.GetC8orsByUserId(id));
         }
         
         [HttpPut("UpdateCollabor8orProfile")]
         public async Task<ActionResult<bool>> UpdateC8or([FromBody]Collabor8orDTO c8or)
         {
             return Ok(await _c8orService.UpdateC8or(c8or));
+        }
+
+        [HttpPost("{userId}")]
+        public async Task<ActionResult<bool>> AddC8or(int userId)
+        {
+            return Ok(await _c8orService.AddC8or(userId));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> DeleteC8or(int id)
+        {
+            return Ok(await _c8orService.DeleteC8or(id));
         }
       
     }

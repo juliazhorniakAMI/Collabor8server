@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using app.DLL.Models;
 using app.DLL.Repositories.Abstract;
 using app.ModelsDTO;
 using app.Sevices.Abstract;
@@ -19,25 +20,17 @@ namespace app.Sevices.Impl
         {
            return _Repository.AddC8or(userId);
         }
-
-        public bool CheckIfC8orCreated(int userId)
+        public  Task<ServiceResponse<List<Collabor8orDTO>>> GetC8orsByUserId(int userId)
         {
-           return _Repository.CheckIfC8orCreated(userId);
+            return _Repository.GetC8orsByUserId(userId);
         }
-
-        public Task<Collabor8orDTO> GetC8orByUserId(int userId)
-        {
-            
-            if(CheckIfC8orCreated(userId)){                  
-                 return _Repository.GetC8orByUserId(userId);}
-            else{
-                  AddC8or(userId);
-                  return _Repository.GetC8orByUserId(userId);
-                }
-            }
         public Task<bool> UpdateC8or(Collabor8orDTO c8or)
         {
             return _Repository.UpdateC8or(c8or);
+        }
+         public Task<bool> DeleteC8or(int id)
+        {
+            return _Repository.DeleteC8or(id);
         }
     }
 }
