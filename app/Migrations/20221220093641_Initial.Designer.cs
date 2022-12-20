@@ -12,8 +12,8 @@ using app.Context;
 namespace app.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221210183709_NullPossibleFounder")]
-    partial class NullPossibleFounder
+    [Migration("20221220093641_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -128,8 +128,7 @@ namespace app.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Collabor8ors");
                 });
@@ -145,6 +144,9 @@ namespace app.Migrations
                     b.Property<string>("BackgroundSummary")
                         .HasColumnType("text");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Resume")
                         .HasColumnType("text");
 
@@ -153,37 +155,11 @@ namespace app.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Founders");
-                });
-
-            modelBuilder.Entity("app.DLL.Models.PM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BackgroundSummary")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Resume")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("PMs");
                 });
 
             modelBuilder.Entity("app.DLL.Models.Project", b =>
@@ -202,8 +178,9 @@ namespace app.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("PMId")
-                        .HasColumnType("integer");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Purpose")
                         .IsRequired()
@@ -211,32 +188,7 @@ namespace app.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PMId");
-
                     b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("app.DLL.Models.ProjectFounder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("FounderId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FounderId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProjectFounders");
                 });
 
             modelBuilder.Entity("app.DLL.Models.ProjectSkill", b =>
@@ -349,8 +301,8 @@ namespace app.Migrations
             modelBuilder.Entity("app.DLL.Models.Collabor8or", b =>
                 {
                     b.HasOne("app.DLL.Models.User", "User")
-                        .WithOne("Collabor8or")
-                        .HasForeignKey("app.DLL.Models.Collabor8or", "UserId")
+                        .WithMany("Collabor8ors")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -359,54 +311,21 @@ namespace app.Migrations
 
             modelBuilder.Entity("app.DLL.Models.Founder", b =>
                 {
-                    b.HasOne("app.DLL.Models.User", "User")
-                        .WithOne("Founder")
-                        .HasForeignKey("app.DLL.Models.Founder", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("app.DLL.Models.PM", b =>
-                {
-                    b.HasOne("app.DLL.Models.User", "User")
-                        .WithOne("PM")
-                        .HasForeignKey("app.DLL.Models.PM", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("app.DLL.Models.Project", b =>
-                {
-                    b.HasOne("app.DLL.Models.PM", "PM")
-                        .WithMany("Project")
-                        .HasForeignKey("PMId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PM");
-                });
-
-            modelBuilder.Entity("app.DLL.Models.ProjectFounder", b =>
-                {
-                    b.HasOne("app.DLL.Models.Founder", "Founder")
-                        .WithMany("ProjectFounder")
-                        .HasForeignKey("FounderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("app.DLL.Models.Project", "Project")
-                        .WithMany("ProjectFounder")
+                        .WithMany("Founders")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Founder");
+                    b.HasOne("app.DLL.Models.User", "User")
+                        .WithMany("Founders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Project");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("app.DLL.Models.ProjectSkill", b =>
@@ -437,23 +356,13 @@ namespace app.Migrations
                     b.Navigation("C8orSkill");
                 });
 
-            modelBuilder.Entity("app.DLL.Models.Founder", b =>
-                {
-                    b.Navigation("ProjectFounder");
-                });
-
-            modelBuilder.Entity("app.DLL.Models.PM", b =>
-                {
-                    b.Navigation("Project");
-                });
-
             modelBuilder.Entity("app.DLL.Models.Project", b =>
                 {
                     b.Navigation("C8orApplied4Project");
 
                     b.Navigation("C8orRequsted4Project");
 
-                    b.Navigation("ProjectFounder");
+                    b.Navigation("Founders");
 
                     b.Navigation("ProjectSkill");
                 });
@@ -467,11 +376,9 @@ namespace app.Migrations
 
             modelBuilder.Entity("app.DLL.Models.User", b =>
                 {
-                    b.Navigation("Collabor8or");
+                    b.Navigation("Collabor8ors");
 
-                    b.Navigation("Founder");
-
-                    b.Navigation("PM");
+                    b.Navigation("Founders");
                 });
 #pragma warning restore 612, 618
         }

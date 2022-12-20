@@ -22,14 +22,13 @@ namespace app.DLL.Repositories.Impl
         {
             return await Add(new Collabor8or(){UserId=userId});
         }
-        public bool CheckIfC8orCreated(int userId)
+        public async Task<ServiceResponse<List<Collabor8orDTO>>> GetC8orsByUserId(int userId)
         {
-             return Context.Collabor8ors.Any(x => x.UserId == userId);
-        }
-        public async Task<Collabor8orDTO> GetC8orByUserId(int userId)
-        {
-             return _mapper.Map<Collabor8or, Collabor8orDTO>(await Context.Collabor8ors.Where(x => x.UserId == userId)
-                .Include(x => x.User).FirstAsync());
+          return  new ServiceResponse<List<Collabor8orDTO>>
+            {
+                Data = await Context.Collabor8ors.Where(x => x.UserId == userId)
+                .Include(x => x.User).Select(c => _mapper.Map<Collabor8orDTO>(c)).ToListAsync()
+            };       
         }
           public async Task<bool> UpdateC8or(Collabor8orDTO c8or)
         { 
@@ -37,6 +36,11 @@ namespace app.DLL.Repositories.Impl
             existingC8or.BackgroundSummary = c8or.BackgroundSummary;
             existingC8or.Resume = c8or.Resume;
             return await Update(existingC8or);
+        }
+          public async Task<bool> DeleteC8or(int id)
+        {
+           var user = await GetById(id);
+            return await Delete(user);
         }
     }
 }

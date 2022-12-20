@@ -7,12 +7,15 @@ namespace app.DLL.Models
 {
     public class User
     {
+        public User()
+        {
+             Founders = new HashSet<Founder>();
+             Collabor8ors = new HashSet<Collabor8or>();
+        }
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual Collabor8or? Collabor8or { get; set; }
-        public virtual PM? PM { get; set; }
-        public virtual Founder? Founder { get; set; }
-
+        public virtual ICollection<Founder> Founders { get; set; }
+        public virtual ICollection<Collabor8or> Collabor8ors { get; set; }
 
     }
 }

@@ -20,9 +20,7 @@ namespace app.Context
         public DbSet<C8orSkill> C8orSkills { get; set; }
         public DbSet<Collabor8or> Collabor8ors { get; set; }
         public DbSet<Founder> Founders { get; set; }
-        public DbSet<PM> PMs { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<ProjectFounder> ProjectFounders { get; set; }
         public DbSet<ProjectSkill> ProjectSkills { get; set; }
         public DbSet<Skill> Skills { get; set; }
        

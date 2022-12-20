@@ -14,7 +14,7 @@ namespace app.DLL.Mapping
         {
               CreateMap<Founder,FounderDTO>()
                 .ForMember(r => r.Name, s => s.MapFrom(t => t.User.Name));
-           
+              CreateMap<FounderDTO,Founder>();
         }
     }
 }

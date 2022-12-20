@@ -33,10 +33,8 @@ builder.Services.AddScoped<IFounderService,FounderService>();
 builder.Services.AddScoped<IFounderRepository,FounderRepository>();
 builder.Services.AddScoped<IProjectService,ProjectService>();
 builder.Services.AddScoped<IProjectRepository,ProjectRepository>();
-builder.Services.AddScoped<IProjectFounderService,ProjectFounderService>();
-builder.Services.AddScoped<IProjectFounderRepository,ProjectFounderRepository>();
-builder.Services.AddScoped<IPMService,PMService>();
-builder.Services.AddScoped<IPMRepository,PMRepository>();
+
+
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 var app = builder.Build();

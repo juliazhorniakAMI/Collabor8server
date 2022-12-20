@@ -19,16 +19,41 @@ namespace app.Controllers
         {
             _founderService = founderService;
         }
-        
-        [HttpGet("{id}",Name ="GetFounderProfile")]  
-        public async Task<ActionResult<ServiceResponse<FounderDTO>>> GetFounder(int id)
+
+        [HttpGet("{id}",Name ="GetFounders")]
+        public async Task<ActionResult<ServiceResponse<List<FounderDTO>>>> GetFoundersByUserId(int id)
         {
-            return Ok(await _founderService.GetFounderByUserId(id));
+            return Ok(await _founderService.GetFoundersByUserId(id));
         }
+
+        [HttpGet("{prId}/{userId}",Name ="GetFoundersByProjectId")]
+        public async Task<ActionResult<ServiceResponse<List<FounderDTO>>>> GetFoundersByProjectId(int prId,int userId)
+        {
+            return Ok(await _founderService.GetFoundersByProjectId(prId,userId));
+        }
+    
+        [HttpPost("PostFounder")]
+        public async Task<ActionResult<bool>> AddFounder([FromBody]FounderDTO founder)
+        {
+            return Ok(await _founderService.AddFounder(founder));
+        }
+
+         [HttpPost("PostOtherFounder")]
+        public async Task<ActionResult<bool>> AddOtherFounders([FromBody]PostOtherFoundersDTO founder)
+        {
+            return Ok(await _founderService.AddOtherFounders(founder));
+        }
+
         [HttpPut("UpdateFounderProfile")]
         public async Task<ActionResult<bool>> UpdateFounder([FromBody]FounderDTO founder)
         {
             return Ok(await _founderService.UpdateFounder(founder));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> DeleteFounder(int id)
+        {
+            return Ok(await _founderService.DeleteFounder(id));
         }
 
     }

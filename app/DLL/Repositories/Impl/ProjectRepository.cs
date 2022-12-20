@@ -31,7 +31,7 @@ namespace app.DLL.Repositories.Impl
         public async Task<bool> UpdateProject(ProjectDTO project)
         {
             var existingProject = Context.Projects.First(x => x.Id == project.Id);
-            existingProject.PMId = project.PMId;
+            existingProject.Name = project.Name;
             existingProject.Purpose = project.Purpose;
             existingProject.Ideas = project.Ideas;
             existingProject.Contracts = project.Contracts;
