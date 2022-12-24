@@ -16,9 +16,9 @@ namespace app.Sevices.Impl
         {
             _Repository=Repository;       
         }
-        public Task<bool> AddC8or(int userId)
+        public Task<bool> AddC8or(Collabor8orDTO c)
         {
-           return _Repository.AddC8or(userId);
+           return _Repository.AddC8or(c);
         }
         public  Task<ServiceResponse<List<Collabor8orDTO>>> GetC8orsByUserId(int userId)
         {
@@ -31,6 +31,11 @@ namespace app.Sevices.Impl
          public Task<bool> DeleteC8or(int id)
         {
             return _Repository.DeleteC8or(id);
+        }
+
+        public Task<ServiceResponse<List<Collabor8orDTO>>> GetAllCollabor8ors()
+        {  
+            return _Repository.GetAllCollabor8ors();
         }
     }
 }

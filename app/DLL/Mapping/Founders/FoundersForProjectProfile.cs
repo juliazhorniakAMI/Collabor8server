@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using app.DLL.Models;
-using app.ModelsDTO;
 using app.ModelsDTO.Founders;
 using AutoMapper;
 
-namespace app.DLL.Mapping
+namespace app.DLL.Mapping.Founders
 {
-    public class FounderProfile:Profile
+    public class FoundersForProjectProfile:Profile
     {
-           public FounderProfile()
+         public FoundersForProjectProfile()
         {
-              CreateMap<Founder,FounderDTO>()
+             CreateMap<Founder,FoundersForProjectDTO>()
                 .ForMember(r => r.Name, s => s.MapFrom(t => t.User.Name));
-              CreateMap<FounderDTO,Founder>();
+              CreateMap<FoundersForProjectDTO,Founder>();     
         }
     }
 }

@@ -33,6 +33,8 @@ builder.Services.AddScoped<IFounderService,FounderService>();
 builder.Services.AddScoped<IFounderRepository,FounderRepository>();
 builder.Services.AddScoped<IProjectService,ProjectService>();
 builder.Services.AddScoped<IProjectRepository,ProjectRepository>();
+builder.Services.AddScoped<IProjectSkillService,ProjectSkillService>();
+builder.Services.AddScoped<IProjectSkillRepository,ProjectSkillRepository>();
 
 
 

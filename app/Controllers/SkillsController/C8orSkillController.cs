@@ -20,10 +20,10 @@ namespace app.Controllers.SkillController
             _c8orskillService = c8orskillService;
         }
 
-        [HttpGet("{c8or}",Name ="GetAll")]
-        public async Task<ActionResult<ServiceResponse<List<C8orSkillDTO>>>> GetMySkills(int c8or)
+        [HttpGet("GetMySkills/{c8orId}")]
+        public async Task<ActionResult<ServiceResponse<List<C8orSkillDTO>>>> GetMySkills(int c8orId)
         {
-            return Ok(await _c8orskillService.GetAll(c8or));
+            return Ok(await _c8orskillService.GetAll(c8orId));
         }
 
         [HttpPost("{c8orId}/{skillId}")]

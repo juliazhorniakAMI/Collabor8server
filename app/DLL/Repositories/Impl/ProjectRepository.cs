@@ -6,6 +6,8 @@ using app.Context;
 using app.DLL.Models;
 using app.DLL.Repositories.Abstract;
 using app.ModelsDTO;
+using app.ModelsDTO.Founders;
+using app.ModelsDTO.Projects;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +19,21 @@ namespace app.DLL.Repositories.Impl
           public ProjectRepository(DataContext context, IMapper mapper) : base(context)
         {
            _mapper = mapper  ;
+        }
+          public async Task<ServiceResponse<List<GetProjectDTO>>> GetAllProjects()
+        {
+            return  new ServiceResponse<List<GetProjectDTO>>
+            {
+                Data = await Context.Projects.Select(c => _mapper.Map<GetProjectDTO>(c)).ToListAsync()
+            };
+        }
+           public async Task<ServiceResponse<ProjectDTO>> GetProjectById(int pjtid)
+        {
+            var project = await Context.Projects.FirstOrDefaultAsync(c => c.Id == pjtid);
+            return new ServiceResponse<ProjectDTO>
+            {    
+               Data = _mapper.Map<ProjectDTO>(project)
+            };
         }
         public async Task<bool> AddProject(ProjectDTO project)
         {

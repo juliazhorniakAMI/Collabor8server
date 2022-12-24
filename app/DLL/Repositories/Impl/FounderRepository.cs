@@ -6,6 +6,7 @@ using app.Context;
 using app.DLL.Models;
 using app.DLL.Repositories.Abstract;
 using app.ModelsDTO;
+using app.ModelsDTO.Founders;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 namespace app.DLL.Repositories.Impl
@@ -26,11 +27,16 @@ namespace app.DLL.Repositories.Impl
             Founder r= _mapper.Map<PostOtherFoundersDTO, Founder>(founder);
             return await Add(r);     
         }
+        public async Task<List<FoundersForProjectDTO>> GetAllFoundersByProjectId(int pjtId)
+        {
+             return await Context.Founders.Include(x=>x.User).Where(x=>(x.ProjectId==pjtId)).Select(c => _mapper.Map<FoundersForProjectDTO>(c)).ToListAsync();
+            
+        }
         public async Task<ServiceResponse<List<FounderDTO>>> GetFoundersByProjectId(int pjtId,int userId)
         {
              return  new ServiceResponse<List<FounderDTO>>
             {
-                Data = await Context.Founders.Where(x=>(x.ProjectId==pjtId && x.UserId!=userId)).Include(x=>x.Project).Select(c => _mapper.Map<FounderDTO>(c)).ToListAsync()
+                Data = await Context.Founders.Include(x=>x.User).Where(x=>(x.ProjectId==pjtId && x.UserId!=userId)).Include(x=>x.Project).Select(c => _mapper.Map<FounderDTO>(c)).ToListAsync()
             };
         }
         public async Task<bool> DeleteFounder(int id)

@@ -18,9 +18,10 @@ namespace app.DLL.Repositories.Impl
         {
            _mapper = mapper  ;
         }
-        public async Task<bool> AddC8or(int userId)
+        public async Task<bool> AddC8or(Collabor8orDTO c)
         {
-            return await Add(new Collabor8or(){UserId=userId});
+            Collabor8or r= _mapper.Map<Collabor8orDTO, Collabor8or>(c);
+            return await Add(r);     
         }
         public async Task<ServiceResponse<List<Collabor8orDTO>>> GetC8orsByUserId(int userId)
         {
@@ -41,6 +42,13 @@ namespace app.DLL.Repositories.Impl
         {
            var user = await GetById(id);
             return await Delete(user);
+        }
+        public async Task<ServiceResponse<List<Collabor8orDTO>>> GetAllCollabor8ors()
+        {
+             return  new ServiceResponse<List<Collabor8orDTO>>
+            {
+                Data = await Context.Collabor8ors.Include(x=>x.User).Select(c => _mapper.Map<Collabor8orDTO>(c)).ToListAsync()
+            };
         }
     }
 }
