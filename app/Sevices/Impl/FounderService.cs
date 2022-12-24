@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using app.DLL.Models;
 using app.DLL.Repositories.Abstract;
 using app.ModelsDTO;
+using app.ModelsDTO.Founders;
 using app.Sevices.Abstract;
 
 namespace app.Sevices.Impl
@@ -39,6 +40,10 @@ namespace app.Sevices.Impl
          public Task<ServiceResponse<List<FounderDTO>>> GetFoundersByProjectId(int pjtId, int userId)
         {
              return _Repository.GetFoundersByProjectId(pjtId,userId);
+        }
+        public Task<List<FoundersForProjectDTO>> GetAllFoundersByProjectId(int pjtId)
+        {
+             return _Repository.GetAllFoundersByProjectId(pjtId);
         }
     }
 }

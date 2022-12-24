@@ -14,7 +14,7 @@ namespace app.DLL.Mapping
         {
               CreateMap<Collabor8or,Collabor8orDTO>()
               .ForMember(r => r.Name, s => s.MapFrom(t => t.User.Name));
-        
+                CreateMap<Collabor8orDTO,Collabor8or>();  
         }        
     }
 }

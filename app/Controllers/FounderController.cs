@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using app.DLL.Models;
 using app.ModelsDTO;
+using app.ModelsDTO.Founders;
 using app.Sevices.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,16 +21,22 @@ namespace app.Controllers
             _founderService = founderService;
         }
 
-        [HttpGet("{id}",Name ="GetFounders")]
-        public async Task<ActionResult<ServiceResponse<List<FounderDTO>>>> GetFoundersByUserId(int id)
+        [HttpGet("GetFoundersByUserId/{userId}")]
+        public async Task<ActionResult<ServiceResponse<List<FounderDTO>>>> GetFoundersByUserId(int userId)
         {
-            return Ok(await _founderService.GetFoundersByUserId(id));
+            return Ok(await _founderService.GetFoundersByUserId(userId));
         }
 
-        [HttpGet("{prId}/{userId}",Name ="GetFoundersByProjectId")]
+        [HttpGet("GetOtherFoundersByProjectId/{prId}/{userId}")]
         public async Task<ActionResult<ServiceResponse<List<FounderDTO>>>> GetFoundersByProjectId(int prId,int userId)
         {
             return Ok(await _founderService.GetFoundersByProjectId(prId,userId));
+        }
+    
+        [HttpGet("GetAllFoundersByProjectId/{prId}")]
+        public async Task<ActionResult<List<FoundersForProjectDTO>>> GetAllFoundersByProjectId(int prId)
+        {
+            return Ok(await _founderService.GetAllFoundersByProjectId(prId));
         }
     
         [HttpPost("PostFounder")]
