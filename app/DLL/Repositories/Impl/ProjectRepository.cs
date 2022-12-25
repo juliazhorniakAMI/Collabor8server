@@ -51,7 +51,6 @@ namespace app.DLL.Repositories.Impl
             existingProject.Name = project.Name;
             existingProject.Purpose = project.Purpose;
             existingProject.Ideas = project.Ideas;
-            existingProject.Contracts = project.Contracts;
             return await Update(existingProject);
         }
     }

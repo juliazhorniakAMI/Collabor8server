@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace app.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class New : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,8 +19,7 @@ namespace app.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Purpose = table.Column<string>(type: "text", nullable: false),
-                    Ideas = table.Column<string>(type: "text", nullable: false),
-                    Contracts = table.Column<string>(type: "text", nullable: false)
+                    Ideas = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -129,26 +128,26 @@ namespace app.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "C8orsApplied4Projects",
+                name: "C8orsAccepted4Project",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     C8orId = table.Column<int>(type: "integer", nullable: false),
                     ProjectId = table.Column<int>(type: "integer", nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: false),
+                    Contracts = table.Column<string>(type: "text", nullable: false),
                     Collabor8orId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_C8orsApplied4Projects", x => x.Id);
+                    table.PrimaryKey("PK_C8orsAccepted4Project", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_C8orsApplied4Projects_Collabor8ors_Collabor8orId",
+                        name: "FK_C8orsAccepted4Project_Collabor8ors_Collabor8orId",
                         column: x => x.Collabor8orId,
                         principalTable: "Collabor8ors",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_C8orsApplied4Projects_Projects_ProjectId",
+                        name: "FK_C8orsAccepted4Project_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
@@ -182,26 +181,28 @@ namespace app.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "C8orsRequsted4Projects",
+                name: "C8orsProjects",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     C8orId = table.Column<int>(type: "integer", nullable: false),
                     ProjectId = table.Column<int>(type: "integer", nullable: false),
+                    Direction = table.Column<int>(type: "integer", nullable: false),
                     status = table.Column<int>(type: "integer", nullable: false),
-                    Collabor8orId = table.Column<int>(type: "integer", nullable: true)
+                    Collabor8orId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_C8orsRequsted4Projects", x => x.Id);
+                    table.PrimaryKey("PK_C8orsProjects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_C8orsRequsted4Projects_Collabor8ors_Collabor8orId",
+                        name: "FK_C8orsProjects_Collabor8ors_Collabor8orId",
                         column: x => x.Collabor8orId,
                         principalTable: "Collabor8ors",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_C8orsRequsted4Projects_Projects_ProjectId",
+                        name: "FK_C8orsProjects_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
@@ -209,13 +210,13 @@ namespace app.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_C8orsApplied4Projects_Collabor8orId",
-                table: "C8orsApplied4Projects",
+                name: "IX_C8orsAccepted4Project_Collabor8orId",
+                table: "C8orsAccepted4Project",
                 column: "Collabor8orId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_C8orsApplied4Projects_ProjectId",
-                table: "C8orsApplied4Projects",
+                name: "IX_C8orsAccepted4Project_ProjectId",
+                table: "C8orsAccepted4Project",
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
@@ -229,13 +230,13 @@ namespace app.Migrations
                 column: "SkillId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_C8orsRequsted4Projects_Collabor8orId",
-                table: "C8orsRequsted4Projects",
+                name: "IX_C8orsProjects_Collabor8orId",
+                table: "C8orsProjects",
                 column: "Collabor8orId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_C8orsRequsted4Projects_ProjectId",
-                table: "C8orsRequsted4Projects",
+                name: "IX_C8orsProjects_ProjectId",
+                table: "C8orsProjects",
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
@@ -268,13 +269,13 @@ namespace app.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "C8orsApplied4Projects");
+                name: "C8orsAccepted4Project");
 
             migrationBuilder.DropTable(
                 name: "C8orSkills");
 
             migrationBuilder.DropTable(
-                name: "C8orsRequsted4Projects");
+                name: "C8orsProjects");
 
             migrationBuilder.DropTable(
                 name: "Founders");

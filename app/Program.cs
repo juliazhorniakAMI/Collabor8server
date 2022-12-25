@@ -35,8 +35,8 @@ builder.Services.AddScoped<IProjectService,ProjectService>();
 builder.Services.AddScoped<IProjectRepository,ProjectRepository>();
 builder.Services.AddScoped<IProjectSkillService,ProjectSkillService>();
 builder.Services.AddScoped<IProjectSkillRepository,ProjectSkillRepository>();
-
-
+builder.Services.AddScoped<IC8orProjectService,C8orProjectService>();
+builder.Services.AddScoped<IC8orProjectRepository,C8orProjectRepository>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 var app = builder.Build();

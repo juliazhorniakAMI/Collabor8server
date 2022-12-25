@@ -15,8 +15,8 @@ namespace app.Context
             
         }
         public DbSet<User> Users { get; set; }
-        public DbSet<C8orApplied4Project> C8orsApplied4Projects { get; set; }
-        public DbSet<C8orRequsted4Project> C8orsRequsted4Projects { get; set; }
+        public DbSet<C8orAccepted4Project> C8orsAccepted4Project { get; set; }
+        public DbSet<C8orProject> C8orsProjects { get; set; }
         public DbSet<C8orSkill> C8orSkills { get; set; }
         public DbSet<Collabor8or> Collabor8ors { get; set; }
         public DbSet<Founder> Founders { get; set; }
