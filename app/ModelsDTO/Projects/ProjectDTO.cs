@@ -11,7 +11,6 @@ namespace app.ModelsDTO
         public string Name { get; set; }
         public string Purpose { get; set; }
         public string Ideas { get; set; }
-        public string Contracts { get; set; }
        
     }
 }

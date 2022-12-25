@@ -32,7 +32,6 @@ namespace app.Sevices.Impl
         {
             return _Repository.DeleteC8or(id);
         }
-
         public Task<ServiceResponse<List<Collabor8orDTO>>> GetAllCollabor8ors()
         {  
             return _Repository.GetAllCollabor8ors();

@@ -12,8 +12,8 @@ using app.Context;
 namespace app.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221220093641_Initial")]
-    partial class Initial
+    [Migration("20221224200826_New")]
+    partial class New
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace app.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("app.DLL.Models.C8orApplied4Project", b =>
+            modelBuilder.Entity("app.DLL.Models.C8orAccepted4Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,10 +39,11 @@ namespace app.Migrations
                     b.Property<int?>("Collabor8orId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("integer");
+                    b.Property<string>("Contracts")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<int>("status")
+                    b.Property<int>("ProjectId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -51,10 +52,10 @@ namespace app.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("C8orsApplied4Projects");
+                    b.ToTable("C8orsAccepted4Project");
                 });
 
-            modelBuilder.Entity("app.DLL.Models.C8orRequsted4Project", b =>
+            modelBuilder.Entity("app.DLL.Models.C8orProject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,7 +66,10 @@ namespace app.Migrations
                     b.Property<int>("C8orId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("Collabor8orId")
+                    b.Property<int>("Collabor8orId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Direction")
                         .HasColumnType("integer");
 
                     b.Property<int>("ProjectId")
@@ -80,7 +84,7 @@ namespace app.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("C8orsRequsted4Projects");
+                    b.ToTable("C8orsProjects");
                 });
 
             modelBuilder.Entity("app.DLL.Models.C8orSkill", b =>
@@ -170,10 +174,6 @@ namespace app.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Contracts")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Ideas")
                         .IsRequired()
                         .HasColumnType("text");
@@ -247,14 +247,14 @@ namespace app.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("app.DLL.Models.C8orApplied4Project", b =>
+            modelBuilder.Entity("app.DLL.Models.C8orAccepted4Project", b =>
                 {
                     b.HasOne("app.DLL.Models.Collabor8or", "Collabor8or")
-                        .WithMany("C8orApplied4Project")
+                        .WithMany("C8orAccepted4Project")
                         .HasForeignKey("Collabor8orId");
 
                     b.HasOne("app.DLL.Models.Project", "Project")
-                        .WithMany("C8orApplied4Project")
+                        .WithMany("C8orAccepted4Project")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -264,14 +264,16 @@ namespace app.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("app.DLL.Models.C8orRequsted4Project", b =>
+            modelBuilder.Entity("app.DLL.Models.C8orProject", b =>
                 {
                     b.HasOne("app.DLL.Models.Collabor8or", "Collabor8or")
-                        .WithMany("C8orRequsted4Project")
-                        .HasForeignKey("Collabor8orId");
+                        .WithMany("C8orsProjects")
+                        .HasForeignKey("Collabor8orId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("app.DLL.Models.Project", "Project")
-                        .WithMany("C8orRequsted4Project")
+                        .WithMany("C8orsProjects")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -349,18 +351,18 @@ namespace app.Migrations
 
             modelBuilder.Entity("app.DLL.Models.Collabor8or", b =>
                 {
-                    b.Navigation("C8orApplied4Project");
-
-                    b.Navigation("C8orRequsted4Project");
+                    b.Navigation("C8orAccepted4Project");
 
                     b.Navigation("C8orSkill");
+
+                    b.Navigation("C8orsProjects");
                 });
 
             modelBuilder.Entity("app.DLL.Models.Project", b =>
                 {
-                    b.Navigation("C8orApplied4Project");
+                    b.Navigation("C8orAccepted4Project");
 
-                    b.Navigation("C8orRequsted4Project");
+                    b.Navigation("C8orsProjects");
 
                     b.Navigation("Founders");
 
