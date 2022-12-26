@@ -21,16 +21,27 @@ namespace app.Controllers
             _cpService = cpService;
         }
         
-        [HttpGet("GetListProjectsForC8or/{direction}/{userId}")]
-        public async Task<ActionResult<ServiceResponse<List<C8orProjectDTO>>>> GetListProjectsForC8or(Direction direction,int userId)
+        [HttpGet("GetListProjectsForAllC8or/{direction}/{userId}")]
+        public async Task<ActionResult<ServiceResponse<List<C8orProjectDTO>>>> GetListProjectsForAllC8or(Direction direction,int userId)
         {
-            return Ok(await _cpService.GetListProjectsForC8or(direction,userId));
+            return Ok(await _cpService.GetListProjectsForAllC8or(direction,userId));
         }
 
-         [HttpGet("GetListC8orsForPjt/{direction}/{userId}")]
-        public async Task<ActionResult<ServiceResponse<List<C8orProjectDTO>>>> GetListC8orsForPjt(Direction direction, int userId)
+         [HttpGet("GetListC8orsForAllPjt/{direction}/{userId}")]
+        public async Task<ActionResult<ServiceResponse<List<C8orProjectDTO>>>> GetListC8orsForAllPjt(Direction direction, int userId)
         {
-            return Ok(await _cpService.GetListC8orsForPjt(direction,userId));
+            return Ok(await _cpService.GetListC8orsForAllPjt(direction,userId));
+        }
+        [HttpGet("GetListProjectsForOneC8or/{direction}/{c8orId}")]
+        public async Task<ActionResult<ServiceResponse<List<C8orProjectDTO>>>> GetListProjectsForOneC8or(Direction direction,int c8orId)
+        {
+            return Ok(await _cpService.GetListProjectsForOneC8or(direction,c8orId));
+        }
+
+         [HttpGet("GetListC8orsForOnePjt/{direction}/{pId}")]
+        public async Task<ActionResult<ServiceResponse<List<C8orProjectDTO>>>> GetListC8orsForOnePjt(Direction direction, int pId)
+        {
+            return Ok(await _cpService.GetListC8orsForOnePjt(direction,pId));
         }
 
         [HttpPost("C8orProject")]
@@ -38,6 +49,19 @@ namespace app.Controllers
         {
             return Ok(await _cpService.AddC8orProject(cp));
         }
+
+        [HttpPut("UpdateStatus/{cpId}/{status}")]
+        public async Task<ActionResult<bool>> UpdateC8orPjtStatus(int cpId,Status status)
+        {
+            return Ok(await _cpService.UpdateC8orPjtStatus(cpId,status));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> DeleteC8orProject(int id)
+        {
+            return Ok(await _cpService.DeleteC8orProject(id));
+        }
+
           
     }
 }

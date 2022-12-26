@@ -1,9 +1,11 @@
+
+
 namespace app.DLL.Models.Enums
 {
     public enum Direction
     {
-        C8orAppliesToProject=0,
-        ProjectRequestsC8or=1
+        C8orAppliesToProject,
+        ProjectRequestsC8or
 
     }
 }

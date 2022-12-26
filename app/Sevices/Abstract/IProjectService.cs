@@ -11,7 +11,7 @@ namespace app.Sevices.Abstract
 {
     public interface IProjectService
     {
-        Task<ServiceResponse<List<GetProjectDTO>>> GetAllProjects();
+        Task<ServiceResponse<List<ProjectDTO>>> GetAllProjects();
         Task<ServiceResponse<ProjectDTO>> GetProjectById(int pjtid);
         Task<bool> AddProject(ProjectDTO project);
         Task<bool> UpdateProject(ProjectDTO project);

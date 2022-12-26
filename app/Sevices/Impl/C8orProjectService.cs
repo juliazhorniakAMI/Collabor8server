@@ -21,15 +21,33 @@ namespace app.Sevices.Impl
         {
             return _Repository.AddC8orProject(cp);
         }
-
-        public Task<ServiceResponse<List<C8orProjectDTO>>> GetListC8orsForPjt(Direction direction, int userId)
+        public Task<bool> DeleteC8orProject(int id)
         {
-             return _Repository.GetListC8orsForPjt(direction,userId);
+            return _Repository.DeleteC8orProject(id);
+        }
+        public Task<ServiceResponse<List<C8orProjectDTO>>> GetListC8orsForAllPjt(Direction direction, int userId)
+        {
+             return _Repository.GetListC8orsForAllPjt(direction,userId);
         }
 
-        public Task<ServiceResponse<List<C8orProjectDTO>>> GetListProjectsForC8or(Direction direction, int userId)
+        public Task<ServiceResponse<List<C8orProjectDTO>>> GetListC8orsForOnePjt(Direction direction, int pId)
         {
-           return _Repository.GetListProjectsForC8or(direction,userId);
+            return _Repository.GetListC8orsForOnePjt( direction, pId);
+        }
+
+        public Task<ServiceResponse<List<C8orProjectDTO>>> GetListProjectsForAllC8or(Direction direction, int userId)
+        {
+           return _Repository.GetListProjectsForAllC8or(direction,userId);
+        }
+
+        public Task<ServiceResponse<List<C8orProjectDTO>>> GetListProjectsForOneC8or(Direction direction, int c8orId)
+        {
+            return _Repository.GetListProjectsForOneC8or( direction, c8orId);
+        }
+
+        public Task<bool> UpdateC8orPjtStatus(int cpId,Status status)
+        {
+             return _Repository.UpdateC8orPjtStatus( cpId, status);
         }
     }
 }
