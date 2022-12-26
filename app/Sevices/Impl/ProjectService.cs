@@ -26,7 +26,7 @@ namespace app.Sevices.Impl
         {
            return _Repository.DeleteProject(id);
         }
-        public Task<ServiceResponse<List<GetProjectDTO>>> GetAllProjects()
+        public Task<ServiceResponse<List<ProjectDTO>>> GetAllProjects()
         {
             return _Repository.GetAllProjects();
         }

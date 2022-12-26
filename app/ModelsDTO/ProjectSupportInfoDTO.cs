@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using app.DLL.Models;
+
 namespace app.ModelsDTO
 {
-    public class ProjectDTO
+    public class ProjectSupportInfoDTO
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Purpose { get; set; }
-       
+        public int ProjectId { get; set; }
+        public string Idea {get;set;}
+    
     }
 }

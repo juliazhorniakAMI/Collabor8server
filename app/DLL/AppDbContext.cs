@@ -23,6 +23,7 @@ namespace app.Context
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectSkill> ProjectSkills { get; set; }
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<ProjectSupportInfo> ProjectSupportInfo { get; set; }
        
     }
 }

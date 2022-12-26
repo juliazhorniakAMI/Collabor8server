@@ -23,7 +23,7 @@ namespace app.Controllers
         }
     
         [HttpGet("GetAll")]
-        public async Task<ActionResult<ServiceResponse<List<GetProjectDTO>>>> GetAllProjects()
+        public async Task<ActionResult<ServiceResponse<List<ProjectDTO>>>> GetAllProjects()
         {
             return Ok(await _projectService.GetAllProjects());
         }

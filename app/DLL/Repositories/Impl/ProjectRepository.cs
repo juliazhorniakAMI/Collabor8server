@@ -20,11 +20,11 @@ namespace app.DLL.Repositories.Impl
         {
            _mapper = mapper  ;
         }
-          public async Task<ServiceResponse<List<GetProjectDTO>>> GetAllProjects()
+          public async Task<ServiceResponse<List<ProjectDTO>>> GetAllProjects()
         {
-            return  new ServiceResponse<List<GetProjectDTO>>
+            return  new ServiceResponse<List<ProjectDTO>>
             {
-                Data = await Context.Projects.Select(c => _mapper.Map<GetProjectDTO>(c)).ToListAsync()
+                Data = await Context.Projects.Select(c => _mapper.Map<ProjectDTO>(c)).ToListAsync()
             };
         }
            public async Task<ServiceResponse<ProjectDTO>> GetProjectById(int pjtid)
@@ -50,7 +50,6 @@ namespace app.DLL.Repositories.Impl
             var existingProject = Context.Projects.First(x => x.Id == project.Id);
             existingProject.Name = project.Name;
             existingProject.Purpose = project.Purpose;
-            existingProject.Ideas = project.Ideas;
             return await Update(existingProject);
         }
     }
