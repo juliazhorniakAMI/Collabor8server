@@ -19,10 +19,17 @@ namespace app.Sevices.Impl
         {
           return _Repository.AddUser(user);
         }
-
+        public Task<bool> CheckIfUserExists(string email, string password)
+        {
+             return _Repository.CheckIfUserExists(email,password);
+        }
         public Task<bool> DeleteUser(int id)
         {
             return _Repository.DeleteUser(id);
+        }
+        public Task<ServiceResponse<UserDTO>> FindUser(string email, string password)
+        {
+            return _Repository.FindUser(email,password);
         }
         public Task<ServiceResponse<List<UserDTO>>> GetAllUsers()
         {

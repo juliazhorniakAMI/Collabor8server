@@ -14,6 +14,8 @@ namespace app.DLL.Models
         }
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
+        public string Pass { get; set; }
         public virtual ICollection<Founder> Founders { get; set; }
         public virtual ICollection<Collabor8or> Collabor8ors { get; set; }
 
