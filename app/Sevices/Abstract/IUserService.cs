@@ -9,6 +9,8 @@ namespace app.Sevices.Abstract
     public interface IUserService
     {
         Task<ServiceResponse<List<UserDTO>>> GetAllUsers();
+        Task<bool> CheckIfUserExists(string email, string password);
+        Task<ServiceResponse<UserDTO>> FindUser(string email, string password);
         Task<bool> AddUser(UserDTO user);
         Task<bool> UpdateUser(UserDTO user);
         Task<bool> DeleteUser(int id);

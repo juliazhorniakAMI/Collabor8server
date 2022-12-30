@@ -34,14 +34,18 @@ namespace app.DLL.Repositories.Impl
                 Data = await Context.Users.Select(c => _mapper.Map<UserDTO>(c)).ToListAsync()
             };
         }
-        // public async Task<ServiceResponse<RoleDTO>> GetRoleById(int id)
-        // {
-        //     var role = await Context.Roles.FirstOrDefaultAsync(c => c.Id == id);
-        //     return new ServiceResponse<RoleDTO>
-        //     {
-        //         Data = _mapper.Map<RoleDTO>(role)
-        //     };
-        // }
+        public async Task<bool> CheckIfUserExists(string email, string password)
+        {
+            return await Context.Users.AnyAsync(x => x.Email == email && x.Pass == password);
+        }
+        public async Task<ServiceResponse<UserDTO>> FindUser(string email, string password)
+        {
+             User user = await Context.Users.FirstAsync(c => c.Email == email && c.Pass==password);
+            return new ServiceResponse<UserDTO>
+            {
+                Data = _mapper.Map<UserDTO>(user)
+            };     
+        }
         public async Task<bool> UpdateUser(UserDTO user)
         {
             var existingUser = Context.Users.First(x => x.Id == user.Id);
@@ -49,6 +53,8 @@ namespace app.DLL.Repositories.Impl
             if (existingUser == null) return false;
 
             existingUser.Name = user.Name;
+            existingUser.Email = user.Email;
+            existingUser.Pass = user.Pass;
 
             return await Update(existingUser);
         }

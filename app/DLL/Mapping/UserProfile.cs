@@ -8,9 +8,9 @@ using AutoMapper;
 
 namespace app.DLL.Mapping
 {
-     class RoleProfile:Profile
+     class UserProfile:Profile
     {
-        public RoleProfile()
+        public UserProfile()
         {
             CreateMap<User, UserDTO>().ReverseMap();
         }
