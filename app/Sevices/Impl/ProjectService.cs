@@ -18,7 +18,7 @@ namespace app.Sevices.Impl
         {
             _Repository=Repository;  
         }
-        public Task<bool> AddProject(ProjectDTO project)
+        public Task<ServiceResponse<bool>> AddProject(ProjectDTO project)
         {
              return _Repository.AddProject(project);
         }

@@ -19,7 +19,7 @@ namespace app.Sevices.Impl
             _cpService=cpService;
         }
 
-        public Task<bool> AddAcceptedC8or4Project(C8orAccepted4ProjectDTO cp)
+        public Task<ServiceResponse<bool>> AddAcceptedC8or4Project(C8orAccepted4ProjectDTO cp)
         {
            return _Repository.AddAcceptedC8or4Project(cp);
         }

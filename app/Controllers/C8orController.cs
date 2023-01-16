@@ -37,7 +37,7 @@ namespace app.Controllers
         }
 
         [HttpPost("PostC8or")]
-        public async Task<ActionResult<bool>> AddC8or([FromBody]Collabor8orDTO c)
+        public async Task<ActionResult<ServiceResponse<bool>>> AddC8or([FromBody]Collabor8orDTO c)
         {
             return Ok(await _c8orService.AddC8or(c));
         }

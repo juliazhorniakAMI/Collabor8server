@@ -17,7 +17,7 @@ namespace app.Sevices.Impl
         {
             _Repository=Repository;       
         }
-        public Task<bool> AddC8orProject(C8orProjectDTO cp)
+        public Task<ServiceResponse<bool>> AddC8orProject(C8orProjectDTO cp)
         {
             return _Repository.AddC8orProject(cp);
         }

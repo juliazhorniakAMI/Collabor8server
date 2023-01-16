@@ -22,7 +22,7 @@ namespace app.Controllers
         }
 
         [HttpPost("AddAcceptedC8or4Pjt")]
-        public async Task<ActionResult<bool>> AddAcceptedC8or4Project([FromBody]C8orAccepted4ProjectDTO cp)
+        public async Task<ActionResult<ServiceResponse<bool>>> AddAcceptedC8or4Project([FromBody]C8orAccepted4ProjectDTO cp)
         {
             return Ok(await _cpService.AddAcceptedC8or4Project(cp));
         }

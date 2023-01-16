@@ -21,7 +21,7 @@ namespace app.Sevices.Impl
         {
             return _Repository.GetFoundersByUserId(userId);
         }
-         public Task<bool> AddFounder(FounderDTO founder)
+         public Task<ServiceResponse<bool>> AddFounder(FounderDTO founder)
         {
            return _Repository.AddFounder(founder);
         }
@@ -33,7 +33,7 @@ namespace app.Sevices.Impl
         {
             return _Repository.DeleteFounder(id);
         }
-         public Task<bool> AddOtherFounders(PostOtherFoundersDTO founder)
+         public Task<ServiceResponse<bool>> AddOtherFounders(PostOtherFoundersDTO founder)
         {
            return _Repository.AddOtherFounders(founder);
         }
