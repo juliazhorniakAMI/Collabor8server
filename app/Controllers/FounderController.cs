@@ -40,13 +40,13 @@ namespace app.Controllers
         }
     
         [HttpPost("PostFounder")]
-        public async Task<ActionResult<bool>> AddFounder([FromBody]FounderDTO founder)
+        public async Task<ActionResult<ServiceResponse<bool>>> AddFounder([FromBody]FounderDTO founder)
         {
             return Ok(await _founderService.AddFounder(founder));
         }
 
          [HttpPost("PostOtherFounder")]
-        public async Task<ActionResult<bool>> AddOtherFounders([FromBody]PostOtherFoundersDTO founder)
+        public async Task<ActionResult<ServiceResponse<bool>>> AddOtherFounders([FromBody]PostOtherFoundersDTO founder)
         {
             return Ok(await _founderService.AddOtherFounders(founder));
         }

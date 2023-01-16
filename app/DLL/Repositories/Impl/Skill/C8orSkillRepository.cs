@@ -19,7 +19,7 @@ namespace app.DLL.Repositories.Impl.Skill
         {
            _mapper = mapper  ;
         }
-        public async Task<bool> AddC8orSkill(int c8orId, int skillId)
+        public async Task<ServiceResponse<bool>> AddC8orSkill(int c8orId, int skillId)
         {
            return await Add(new Models.C8orSkill(){C8orId=c8orId,SkillId=skillId});    
         }

@@ -26,7 +26,7 @@ namespace app.Controllers.SkillsController
         }
 
         [HttpPost("AddProjectSkill/{pjtId}/{skillId}")]
-        public async Task<ActionResult<bool>> AddProjectSkill(int pjtId,int skillId)
+        public async Task<ActionResult<ServiceResponse<bool>>> AddProjectSkill(int pjtId,int skillId)
         {
             return Ok(await _pjtskillService.AddProjectSkill(pjtId,skillId));
         }

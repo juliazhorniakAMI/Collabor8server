@@ -10,7 +10,7 @@ namespace app.DLL.Repositories.Abstract
 {
     public interface IC8orProjectRepository
     {
-          Task<bool> AddC8orProject(C8orProjectDTO cp);
+          Task<ServiceResponse<bool>> AddC8orProject(C8orProjectDTO cp);
           Task<ServiceResponse<List<C8orProjectDTO>>> GetListProjectsForAllC8or(Direction direction,int userId);
           Task<ServiceResponse<List<C8orProjectDTO>>> GetListC8orsForAllPjt(Direction direction, int userId);
           Task<ServiceResponse<List<C8orProjectDTO>>> GetListProjectsForOneC8or(Direction direction,int c8orId);

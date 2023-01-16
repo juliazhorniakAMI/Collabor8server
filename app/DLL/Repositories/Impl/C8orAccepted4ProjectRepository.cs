@@ -18,7 +18,7 @@ namespace app.DLL.Repositories.Impl
         {
             _mapper = mapper;
         }
-        public async Task<bool> AddAcceptedC8or4Project(C8orAccepted4ProjectDTO cp)
+        public async Task<ServiceResponse<bool>> AddAcceptedC8or4Project(C8orAccepted4ProjectDTO cp)
         {
             C8orAccepted4Project r = _mapper.Map<C8orAccepted4ProjectDTO, C8orAccepted4Project>(cp);
             return await Add(r);

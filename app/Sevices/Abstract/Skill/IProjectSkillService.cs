@@ -9,7 +9,7 @@ namespace app.Sevices.Abstract.Skill
     public interface IProjectSkillService
     {
         Task<ServiceResponse<List<ProjectSkillDTO>>> GetAll(int pjtId);
-        Task<bool> AddProjectSkill(int pjtId,int skillId);
+        Task<ServiceResponse<bool>> AddProjectSkill(int pjtId,int skillId);
         Task<bool> DeleteProjectSkill(int id);
     }
 }

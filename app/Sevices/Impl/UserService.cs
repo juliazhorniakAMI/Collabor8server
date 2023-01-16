@@ -15,9 +15,9 @@ namespace app.Sevices.Impl
         {
             _Repository=Repository;       
         }
-        public Task<bool> AddUser(UserDTO user)
+        public Task<ServiceResponse<bool>> Register(UserDTO user)
         {
-          return _Repository.AddUser(user);
+          return _Repository.Register(user);
         }
         public Task<bool> CheckIfUserExists(string email, string password)
         {
@@ -27,9 +27,9 @@ namespace app.Sevices.Impl
         {
             return _Repository.DeleteUser(id);
         }
-        public Task<ServiceResponse<UserDTO>> FindUser(string email, string password)
+        public Task<ServiceResponse<UserDTO>> Login(string email, string password)
         {
-            return _Repository.FindUser(email,password);
+            return _Repository.Login(email,password);
         }
         public Task<ServiceResponse<List<UserDTO>>> GetAllUsers()
         {

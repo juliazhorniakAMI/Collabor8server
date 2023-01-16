@@ -17,7 +17,7 @@ namespace app.Sevices.Impl
             _Repository=Repository;       
         }
 
-        public Task<bool> AddSupportInfo(ProjectSupportInfoDTO psi)
+        public Task<ServiceResponse<bool>> AddSupportInfo(ProjectSupportInfoDTO psi)
         {
             return _Repository.AddSupportInfo(psi);
         }

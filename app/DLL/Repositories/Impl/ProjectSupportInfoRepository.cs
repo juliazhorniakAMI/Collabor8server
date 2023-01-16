@@ -26,7 +26,7 @@ namespace app.DLL.Repositories.Impl
                 .Select(c => _mapper.Map<ProjectSupportInfoDTO>(c)).ToListAsync()
             };
         }
-        public async Task<bool> AddSupportInfo(ProjectSupportInfoDTO psi)
+        public async Task<ServiceResponse<bool>> AddSupportInfo(ProjectSupportInfoDTO psi)
         {
            ProjectSupportInfo r= _mapper.Map<ProjectSupportInfoDTO, ProjectSupportInfo>(psi);
             return await Add(r);         

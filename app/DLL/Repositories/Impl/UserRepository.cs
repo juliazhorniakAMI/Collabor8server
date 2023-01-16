@@ -17,9 +17,15 @@ namespace app.DLL.Repositories.Impl
         {
            _mapper = mapper  ;
         }
-        public async Task<bool> AddUser(UserDTO user)
+        public async Task<ServiceResponse<bool>> Register(UserDTO user)
         {
+            var response=new ServiceResponse<bool>();
             User r= _mapper.Map<UserDTO, User>(user);
+            if(await CheckIfUserExists(r.Email,r.Pass)){
+                response.Success = false;
+                response.Message = "User already exists";
+                return response;
+            }     
             return await Add(r);         
         }
         public async Task<bool> DeleteUser(int id)
@@ -38,13 +44,19 @@ namespace app.DLL.Repositories.Impl
         {
             return await Context.Users.AnyAsync(x => x.Email == email && x.Pass == password);
         }
-        public async Task<ServiceResponse<UserDTO>> FindUser(string email, string password)
+        public async Task<ServiceResponse<UserDTO>> Login(string email, string password)
         {
-             User user = await Context.Users.FirstAsync(c => c.Email == email && c.Pass==password);
-            return new ServiceResponse<UserDTO>
-            {
-                Data = _mapper.Map<UserDTO>(user)
-            };     
+            var response=new ServiceResponse<UserDTO>();
+             User user = await Context.Users.FirstOrDefaultAsync(c => c.Email == email && c.Pass==password);
+             if(user is null){
+                response.Success = false;
+                response.Message = "User not found";          
+             }
+             else{         
+                response.Data=_mapper.Map<UserDTO>(user);
+             }
+             return response;
+            
         }
         public async Task<bool> UpdateUser(UserDTO user)
         {
@@ -58,5 +70,6 @@ namespace app.DLL.Repositories.Impl
 
             return await Update(existingUser);
         }
+
     }
 }

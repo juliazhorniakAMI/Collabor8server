@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using app.DLL.Models;
 using app.DLL.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,11 +18,11 @@ namespace app.DLL.Repositories.Impl
         {
             Context = context;
         } 
-        public async Task<bool> Add(TEntity entity)
+        public async Task<ServiceResponse<bool>> Add(TEntity entity)
         {
             var item =  Context.Set<TEntity>().Add(entity);
             await Context.SaveChangesAsync();
-            return true;
+            return new ServiceResponse<bool>();
         }
 
         public async Task<bool> Update(TEntity entity)
@@ -42,5 +43,7 @@ namespace app.DLL.Repositories.Impl
             return  await Context.Set<TEntity>()
                 .FindAsync(id);
         }
+
+      
     }
 }

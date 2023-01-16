@@ -15,7 +15,7 @@ namespace app.Sevices.Impl.Skill
         {
             _Repository=Repository;       
         }
-        public Task<bool> AddC8orSkill(int c8orId, int skillId)
+        public Task<ServiceResponse<bool>> AddC8orSkill(int c8orId, int skillId)
         {
             return _Repository.AddC8orSkill(c8orId,skillId);
         }

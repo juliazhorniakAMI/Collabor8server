@@ -27,7 +27,7 @@ namespace app.Controllers.SkillController
         }
 
         [HttpPost("{c8orId}/{skillId}")]
-        public async Task<ActionResult<bool>> AddC8orSkill(int c8orId,int skillId)
+        public async Task<ActionResult<ServiceResponse<bool>>> AddC8orSkill(int c8orId,int skillId)
         {
             return Ok(await _c8orskillService.AddC8orSkill(c8orId,skillId));
         }

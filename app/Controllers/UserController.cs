@@ -24,10 +24,10 @@ namespace restapi.Controllers
             return Ok(await _userService.GetAllUsers());
         }
 
-        [HttpPost("AddUser")]
-        public async Task<ActionResult<bool>> AddUser([FromBody]UserDTO user)
+        [HttpPost("Register")]
+        public async Task<ActionResult<ServiceResponse<bool>>> Register([FromBody]UserDTO user)
         {
-            return Ok(await _userService.AddUser(user));
+            return Ok(await _userService.Register(user));
         }
 
         [HttpPut("UpdateUser")]
@@ -42,10 +42,10 @@ namespace restapi.Controllers
             return Ok(await _userService.CheckIfUserExists(email,password));
         }
 
-        [HttpGet("FindUser/{email}/{password}")]
-        public async Task<ActionResult<ServiceResponse<UserDTO>>> FindUser(string email, string password)
+        [HttpGet("Login/{email}/{password}")]
+        public async Task<ActionResult<ServiceResponse<UserDTO>>> Login(string email, string password)
         {
-            return Ok(await _userService.FindUser(email,password));
+            return Ok(await _userService.Login(email,password));
         }
 
         [HttpDelete("DeleteUser/{id}")]

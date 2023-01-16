@@ -9,7 +9,7 @@ namespace app.DLL.Repositories.Abstract
 {
     public interface IProjectSupportInfoRepository
     {
-          Task<bool> AddSupportInfo(ProjectSupportInfoDTO psi);
+          Task<ServiceResponse<bool>> AddSupportInfo(ProjectSupportInfoDTO psi);
           Task<ServiceResponse<List<ProjectSupportInfoDTO>>> GetAllInfoByProjectId(int pjtId);
           Task<bool> UpdateInfoForProject(ProjectSupportInfoDTO psi);
           Task<bool> DeleteInfoFromProject(int id);

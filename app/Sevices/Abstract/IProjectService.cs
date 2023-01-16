@@ -13,7 +13,7 @@ namespace app.Sevices.Abstract
     {
         Task<ServiceResponse<List<ProjectDTO>>> GetAllProjects();
         Task<ServiceResponse<ProjectDTO>> GetProjectById(int pjtid);
-        Task<bool> AddProject(ProjectDTO project);
+        Task<ServiceResponse<bool>> AddProject(ProjectDTO project);
         Task<bool> UpdateProject(ProjectDTO project);
         Task<bool> DeleteProject(int id);
     }

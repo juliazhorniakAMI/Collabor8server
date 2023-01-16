@@ -18,7 +18,7 @@ namespace app.DLL.Repositories.Impl
         {
            _mapper = mapper  ;
         }
-        public async Task<bool> AddC8or(Collabor8orDTO c)
+        public async Task<ServiceResponse<bool>> AddC8or(Collabor8orDTO c)
         {
             Collabor8or r= _mapper.Map<Collabor8orDTO, Collabor8or>(c);
             return await Add(r);     

@@ -19,7 +19,7 @@ namespace app.DLL.Repositories.Impl
         {
            _mapper = mapper  ;
         }
-        public async Task<bool> AddC8orProject(C8orProjectDTO cp)
+        public async Task<ServiceResponse<bool>> AddC8orProject(C8orProjectDTO cp)
         {
            
             C8orProject r= _mapper.Map<C8orProjectDTO, C8orProject>(cp);

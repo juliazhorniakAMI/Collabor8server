@@ -14,7 +14,7 @@ namespace app.Sevices.Impl.Skill
         {
             _Repository=Repository;       
         }
-        public Task<bool> AddProjectSkill(int pjtId, int skillId)
+        public Task<ServiceResponse<bool>> AddProjectSkill(int pjtId, int skillId)
         {
            return _Repository.AddProjectSkill(pjtId,skillId);
         }

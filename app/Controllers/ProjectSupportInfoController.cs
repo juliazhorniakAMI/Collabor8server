@@ -27,7 +27,7 @@ namespace app.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<bool>> AddSupportInfo([FromBody]ProjectSupportInfoDTO psi)
+        public async Task<ActionResult<ServiceResponse<bool>>> AddSupportInfo([FromBody]ProjectSupportInfoDTO psi)
         {
             return Ok(await _supportService.AddSupportInfo(psi));
         }
