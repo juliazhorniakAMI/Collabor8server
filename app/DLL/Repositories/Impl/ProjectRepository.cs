@@ -22,10 +22,11 @@ namespace app.DLL.Repositories.Impl
         }
           public async Task<ServiceResponse<List<ProjectDTO>>> GetAllProjects()
         {
-            return  new ServiceResponse<List<ProjectDTO>>
+             var list = Context.Projects.Include(x=>x.ProjectSkill).Include(x=>x.ProjectSupportInfo).Include(x => x.Founders).ThenInclude(x=>x.User).ToList(); 
+             return new ServiceResponse<List<ProjectDTO>>
             {
-                Data = await Context.Projects.Select(c => _mapper.Map<ProjectDTO>(c)).ToListAsync()
-            };
+              Data =  list.Select( c =>  _mapper.Map<ProjectDTO>(c)).ToList()
+            };       
         }
            public async Task<ServiceResponse<ProjectDTO>> GetProjectById(int pjtid)
         {

@@ -33,7 +33,7 @@ namespace app.DLL.Repositories.Impl
         }
           public async Task<bool> UpdateC8or(Collabor8orDTO c8or)
         { 
-            var existingC8or =  Context.Collabor8ors.First(x => x.UserId == c8or.Id);
+            var existingC8or =  Context.Collabor8ors.First(x => x.Resume == c8or.UserName);
             existingC8or.BackgroundSummary = c8or.BackgroundSummary;
             existingC8or.Resume = c8or.Resume;
             return await Update(existingC8or);
@@ -45,9 +45,10 @@ namespace app.DLL.Repositories.Impl
         }
         public async Task<ServiceResponse<List<Collabor8orDTO>>> GetAllCollabor8ors()
         {
-             return  new ServiceResponse<List<Collabor8orDTO>>
+            var list = await Context.Collabor8ors.Include(x=>x.User).Include(x=>x.C8orSkill).ToListAsync();
+             return new ServiceResponse<List<Collabor8orDTO>>
             {
-                Data = await Context.Collabor8ors.Include(x=>x.User).Select(c => _mapper.Map<Collabor8orDTO>(c)).ToListAsync()
+              Data = list.Select( c =>  _mapper.Map<Collabor8orDTO>(c)).ToList()
             };
         }
     }
