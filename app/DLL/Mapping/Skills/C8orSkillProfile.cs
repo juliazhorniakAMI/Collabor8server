@@ -12,7 +12,7 @@ namespace app.DLL.Mapping.Skills
     {
         public C8orSkillProfile()
         {
-             CreateMap<C8orSkill, C8orSkillDTO>().ForMember(r => r.Name, s => s.MapFrom(t => t.Skill.FullName));
+             CreateMap<C8orSkill, C8orSkillDTO>().ForMember(r => r.Name, s => s.MapFrom(t => t.Skill.Id));
         }
     }
 }
