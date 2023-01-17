@@ -20,9 +20,10 @@ namespace app.DLL.Models
         public string SphereId { get; set; }
         public virtual Sphere? Sphere { get; set; }
         public virtual ICollection<ProjectSupportInfo> ProjectSupportInfo { get; set; }
-        public virtual ICollection<C8orProject> C8orsProjects { get; set; }
+        public virtual ICollection<C8orProject>? C8orsProjects { get; set; }
         public virtual ICollection<Founder> Founders { get; set; }
         public virtual ICollection<ProjectSkill> ProjectSkill { get; set; }
+
 
     }
 }

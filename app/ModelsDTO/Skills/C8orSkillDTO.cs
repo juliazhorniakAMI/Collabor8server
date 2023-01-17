@@ -8,9 +8,8 @@ namespace app.ModelsDTO.Skills
 {
     public class C8orSkillDTO
     {
-        public int Id { get; set; }
-        public int SkillId { get; set; }
-        public int C8orId { get; set; }
-        public string Name {get;set;}
+        public int UserId { get; set; }
+        public string SphereId { get; set; }
+        public string SkillId { get; set; }
     }
 }

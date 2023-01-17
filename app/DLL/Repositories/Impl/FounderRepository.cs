@@ -46,10 +46,10 @@ namespace app.DLL.Repositories.Impl
         }
         public async Task<bool> UpdateFounder(FounderDTO founder)
         {
-            var existingFounder =  Context.Founders.First(x => x.UserId == founder.Id);
+            var existingFounder =  Context.Founders.First(x => x.UserId == founder.UserId);
             existingFounder.BackgroundSummary = founder.BackgroundSummary;
             existingFounder.Resume = founder.Resume;
-            existingFounder.Project = _mapper.Map<ProjectDTO, Project>(founder.Project);
+           // existingFounder.Project = _mapper.Map<ProjectDTO, Project>(founder.);
             return await Update(existingFounder);
         }
         public async Task<ServiceResponse<List<FounderDTO>>> GetFoundersByUserId(int userId)
