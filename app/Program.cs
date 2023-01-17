@@ -39,8 +39,7 @@ builder.Services.AddTransient<IC8orProjectService,C8orProjectService>();
 builder.Services.AddTransient<IC8orProjectRepository,C8orProjectRepository>();
 builder.Services.AddTransient<IProjectSupportInfoService,ProjectSupportInfoService>();
 builder.Services.AddTransient<IProjectSupportInfoRepository,ProjectSupportInfoRepository>();
-builder.Services.AddTransient<IC8orAccepted4ProjectService,C8orAccepted4ProjectService>();
-builder.Services.AddTransient<IC8orAccepted4ProjectRepository,C8orAccepted4ProjectRepository>();
+
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 var app = builder.Build();
 

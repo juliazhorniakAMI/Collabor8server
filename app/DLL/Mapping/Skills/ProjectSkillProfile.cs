@@ -12,7 +12,7 @@ namespace app.DLL.Mapping.Skills
     {
          public ProjectSkillProfile()
         {
-             CreateMap<ProjectSkill, ProjectSkillDTO>().ForMember(r => r.Name, s => s.MapFrom(t => t.Skill.FullName));
+             CreateMap<ProjectSkill, ProjectSkillDTO>().ForMember(r => r.Name, s => s.MapFrom(t => t.Skill.Id));
         }
     }
 }

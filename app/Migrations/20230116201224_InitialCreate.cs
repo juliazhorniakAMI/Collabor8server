@@ -6,37 +6,31 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace app.Migrations
 {
     /// <inheritdoc />
-    public partial class New : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Projects",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Purpose = table.Column<string>(type: "text", nullable: false),
-                    Ideas = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Projects", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Skills",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FullName = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Skills", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Spheres",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Spheres", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,7 +39,9 @@ namespace app.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Pass = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,27 +49,46 @@ namespace app.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectSkills",
+                name: "Projects",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SkillId = table.Column<int>(type: "integer", nullable: false),
-                    ProjectId = table.Column<int>(type: "integer", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Purpose = table.Column<string>(type: "text", nullable: false),
+                    SphereId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectSkills", x => x.Id);
+                    table.PrimaryKey("PK_Projects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProjectSkills_Projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Projects",
+                        name: "FK_Projects_Spheres_SphereId",
+                        column: x => x.SphereId,
+                        principalTable: "Spheres",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SphereSkills",
+                columns: table => new
+                {
+                    SphereId = table.Column<string>(type: "text", nullable: false),
+                    SkillId = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SphereSkills", x => new { x.SphereId, x.SkillId });
+                    table.ForeignKey(
+                        name: "FK_SphereSkills_Skills_SkillId",
+                        column: x => x.SkillId,
+                        principalTable: "Skills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProjectSkills_Skills_SkillId",
-                        column: x => x.SkillId,
-                        principalTable: "Skills",
+                        name: "FK_SphereSkills_Spheres_SphereId",
+                        column: x => x.SphereId,
+                        principalTable: "Spheres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -82,15 +97,20 @@ namespace app.Migrations
                 name: "Collabor8ors",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<int>(type: "integer", nullable: false),
+                    SphereId = table.Column<string>(type: "text", nullable: false),
                     BackgroundSummary = table.Column<string>(type: "text", nullable: true),
                     Resume = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Collabor8ors", x => x.Id);
+                    table.PrimaryKey("PK_Collabor8ors", x => new { x.UserId, x.SphereId });
+                    table.ForeignKey(
+                        name: "FK_Collabor8ors_Spheres_SphereId",
+                        column: x => x.SphereId,
+                        principalTable: "Spheres",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Collabor8ors_Users_UserId",
                         column: x => x.UserId,
@@ -103,8 +123,6 @@ namespace app.Migrations
                 name: "Founders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     ProjectId = table.Column<int>(type: "integer", nullable: false),
                     BackgroundSummary = table.Column<string>(type: "text", nullable: true),
@@ -112,7 +130,7 @@ namespace app.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Founders", x => x.Id);
+                    table.PrimaryKey("PK_Founders", x => new { x.UserId, x.ProjectId });
                     table.ForeignKey(
                         name: "FK_Founders_Projects_ProjectId",
                         column: x => x.ProjectId,
@@ -128,26 +146,43 @@ namespace app.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "C8orsAccepted4Project",
+                name: "ProjectSkills",
+                columns: table => new
+                {
+                    SkillId = table.Column<string>(type: "text", nullable: false),
+                    ProjectId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectSkills", x => new { x.SkillId, x.ProjectId });
+                    table.ForeignKey(
+                        name: "FK_ProjectSkills_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProjectSkills_Skills_SkillId",
+                        column: x => x.SkillId,
+                        principalTable: "Skills",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectSupportInfo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    C8orId = table.Column<int>(type: "integer", nullable: false),
                     ProjectId = table.Column<int>(type: "integer", nullable: false),
-                    Contracts = table.Column<string>(type: "text", nullable: false),
-                    Collabor8orId = table.Column<int>(type: "integer", nullable: true)
+                    Idea = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_C8orsAccepted4Project", x => x.Id);
+                    table.PrimaryKey("PK_ProjectSupportInfo", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_C8orsAccepted4Project_Collabor8ors_Collabor8orId",
-                        column: x => x.Collabor8orId,
-                        principalTable: "Collabor8ors",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_C8orsAccepted4Project_Projects_ProjectId",
+                        name: "FK_ProjectSupportInfo_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
@@ -158,20 +193,19 @@ namespace app.Migrations
                 name: "C8orSkills",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SkillId = table.Column<int>(type: "integer", nullable: false),
-                    C8orId = table.Column<int>(type: "integer", nullable: false),
-                    Collabor8orId = table.Column<int>(type: "integer", nullable: true)
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    SphereId = table.Column<string>(type: "text", nullable: false),
+                    SkillId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_C8orSkills", x => x.Id);
+                    table.PrimaryKey("PK_C8orSkills", x => new { x.UserId, x.SphereId, x.SkillId });
                     table.ForeignKey(
-                        name: "FK_C8orSkills_Collabor8ors_Collabor8orId",
-                        column: x => x.Collabor8orId,
+                        name: "FK_C8orSkills_Collabor8ors_UserId_SphereId",
+                        columns: x => new { x.UserId, x.SphereId },
                         principalTable: "Collabor8ors",
-                        principalColumn: "Id");
+                        principalColumns: new[] { "UserId", "SphereId" },
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_C8orSkills_Skills_SkillId",
                         column: x => x.SkillId,
@@ -184,22 +218,22 @@ namespace app.Migrations
                 name: "C8orsProjects",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    C8orId = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    SphereId = table.Column<string>(type: "text", nullable: false),
                     ProjectId = table.Column<int>(type: "integer", nullable: false),
+                    ProposedURL = table.Column<string>(type: "text", nullable: true),
+                    AgreementURL = table.Column<string>(type: "text", nullable: true),
                     Direction = table.Column<int>(type: "integer", nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: false),
-                    Collabor8orId = table.Column<int>(type: "integer", nullable: false)
+                    status = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_C8orsProjects", x => x.Id);
+                    table.PrimaryKey("PK_C8orsProjects", x => new { x.UserId, x.SphereId, x.ProjectId });
                     table.ForeignKey(
-                        name: "FK_C8orsProjects_Collabor8ors_Collabor8orId",
-                        column: x => x.Collabor8orId,
+                        name: "FK_C8orsProjects_Collabor8ors_UserId_SphereId",
+                        columns: x => new { x.UserId, x.SphereId },
                         principalTable: "Collabor8ors",
-                        principalColumn: "Id",
+                        principalColumns: new[] { "UserId", "SphereId" },
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_C8orsProjects_Projects_ProjectId",
@@ -210,29 +244,9 @@ namespace app.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_C8orsAccepted4Project_Collabor8orId",
-                table: "C8orsAccepted4Project",
-                column: "Collabor8orId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_C8orsAccepted4Project_ProjectId",
-                table: "C8orsAccepted4Project",
-                column: "ProjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_C8orSkills_Collabor8orId",
-                table: "C8orSkills",
-                column: "Collabor8orId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_C8orSkills_SkillId",
                 table: "C8orSkills",
                 column: "SkillId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_C8orsProjects_Collabor8orId",
-                table: "C8orsProjects",
-                column: "Collabor8orId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_C8orsProjects_ProjectId",
@@ -240,9 +254,9 @@ namespace app.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Collabor8ors_UserId",
+                name: "IX_Collabor8ors_SphereId",
                 table: "Collabor8ors",
-                column: "UserId");
+                column: "SphereId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Founders_ProjectId",
@@ -250,9 +264,9 @@ namespace app.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Founders_UserId",
-                table: "Founders",
-                column: "UserId");
+                name: "IX_Projects_SphereId",
+                table: "Projects",
+                column: "SphereId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectSkills_ProjectId",
@@ -260,17 +274,19 @@ namespace app.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectSkills_SkillId",
-                table: "ProjectSkills",
+                name: "IX_ProjectSupportInfo_ProjectId",
+                table: "ProjectSupportInfo",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SphereSkills_SkillId",
+                table: "SphereSkills",
                 column: "SkillId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "C8orsAccepted4Project");
-
             migrationBuilder.DropTable(
                 name: "C8orSkills");
 
@@ -284,6 +300,12 @@ namespace app.Migrations
                 name: "ProjectSkills");
 
             migrationBuilder.DropTable(
+                name: "ProjectSupportInfo");
+
+            migrationBuilder.DropTable(
+                name: "SphereSkills");
+
+            migrationBuilder.DropTable(
                 name: "Collabor8ors");
 
             migrationBuilder.DropTable(
@@ -294,6 +316,9 @@ namespace app.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Spheres");
         }
     }
 }

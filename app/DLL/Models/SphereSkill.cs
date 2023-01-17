@@ -7,12 +7,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace app.DLL.Models
 {
-    public class C8orSkill
-    { 
-        public int UserId { get; set; }
+    public class SphereSkill
+    {
         public string SphereId { get; set; }
         public string SkillId { get; set; }
-        public virtual Collabor8or? Collabor8or { get; set; }
+        public virtual Sphere? Sphere { get; set; }
         public virtual Skill? Skill { get; set; }
 
     }
