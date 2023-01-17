@@ -34,7 +34,7 @@ namespace app.Controllers
             return Ok(await _projectService.GetProjectById(pjtid));
         }
         [HttpPost]
-        public async Task<ActionResult<bool>> AddProject([FromBody]ProjectDTO p)
+        public async Task<ActionResult<ServiceResponse<bool>>> AddProject([FromBody]ProjectDTO p)
         {
             return Ok(await _projectService.AddProject(p));
         }

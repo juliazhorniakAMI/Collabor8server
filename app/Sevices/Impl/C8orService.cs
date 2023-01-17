@@ -16,7 +16,7 @@ namespace app.Sevices.Impl
         {
             _Repository=Repository;       
         }
-        public Task<bool> AddC8or(Collabor8orDTO c)
+        public Task<ServiceResponse<bool>> AddC8or(Collabor8orDTO c)
         {
            return _Repository.AddC8or(c);
         }

@@ -18,9 +18,10 @@ namespace app.DLL.Repositories.Impl.Skill
         {
            _mapper = mapper  ;
         }
-        public async Task<bool> AddProjectSkill(int pjtId, int skillId)
+        public async Task<ServiceResponse<bool>> AddProjectSkill(int pjtId, int skillId)
         {
-            return await Add(new Models.ProjectSkill(){ProjectId=pjtId,SkillId=skillId});    
+             return await Add(new Models.ProjectSkill(){ProjectId=pjtId});    
+            //return await Add(new Models.ProjectSkill(){ProjectId=pjtId,SkillId=skillId});    
         }
         public async Task<bool> DeleteProjectSkill(int id)
         {

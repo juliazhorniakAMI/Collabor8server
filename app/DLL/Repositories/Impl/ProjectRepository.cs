@@ -35,7 +35,7 @@ namespace app.DLL.Repositories.Impl
                Data = _mapper.Map<ProjectDTO>(project)
             };
         }
-        public async Task<bool> AddProject(ProjectDTO project)
+        public async Task<ServiceResponse<bool>> AddProject(ProjectDTO project)
         {
            Project r= _mapper.Map<ProjectDTO, Project>(project);
             return await Add(r);         

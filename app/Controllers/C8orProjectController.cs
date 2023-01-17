@@ -45,7 +45,7 @@ namespace app.Controllers
         }
 
         [HttpPost("C8orProject")]
-        public async Task<ActionResult<bool>> AddC8orProject([FromBody]C8orProjectDTO cp)
+        public async Task<ActionResult<ServiceResponse<bool>>> AddC8orProject([FromBody]C8orProjectDTO cp)
         {
             return Ok(await _cpService.AddC8orProject(cp));
         }

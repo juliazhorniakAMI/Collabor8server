@@ -17,12 +17,12 @@ namespace app.DLL.Repositories.Impl
         {
            _mapper = mapper  ;
         }
-        public async Task<bool> AddFounder(FounderDTO founder)
+        public async Task<ServiceResponse<bool>> AddFounder(FounderDTO founder)
         {
             Founder r= _mapper.Map<FounderDTO, Founder>(founder);
             return await Add(r);     
         }
-         public async Task<bool> AddOtherFounders(PostOtherFoundersDTO founder)
+         public async Task<ServiceResponse<bool>> AddOtherFounders(PostOtherFoundersDTO founder)
         {
             Founder r= _mapper.Map<PostOtherFoundersDTO, Founder>(founder);
             return await Add(r);     
@@ -46,7 +46,7 @@ namespace app.DLL.Repositories.Impl
         }
         public async Task<bool> UpdateFounder(FounderDTO founder)
         {
-            var existingFounder =  Context.Founders.First(x => x.Id == founder.Id);
+            var existingFounder =  Context.Founders.First(x => x.UserId == founder.Id);
             existingFounder.BackgroundSummary = founder.BackgroundSummary;
             existingFounder.Resume = founder.Resume;
             existingFounder.Project = _mapper.Map<ProjectDTO, Project>(founder.Project);

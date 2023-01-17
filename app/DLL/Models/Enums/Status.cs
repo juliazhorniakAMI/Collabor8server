@@ -4,11 +4,15 @@ namespace app.DLL.Models
 {
     public enum Status
     {
-        [Description("Pending")]
-        Pending,
-        [Description("Accepted")]
-        Accepted,
-        [Description("Rejected")]
-        Rejected
+        Null,
+        SeenbyPMFounder,
+        SeenbyCollabor8r,
+        Rejected,
+        ProposalMadebyPMFounder,
+        ProposalMadebyCollabor8r,
+        ProposalMadebyBoth,
+        ProposalAcceptedbyPM,
+        ProposalAcceptedbyCollabor8r
+
     }
 }

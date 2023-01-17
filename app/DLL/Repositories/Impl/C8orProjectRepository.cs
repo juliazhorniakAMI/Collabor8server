@@ -19,7 +19,7 @@ namespace app.DLL.Repositories.Impl
         {
            _mapper = mapper  ;
         }
-        public async Task<bool> AddC8orProject(C8orProjectDTO cp)
+        public async Task<ServiceResponse<bool>> AddC8orProject(C8orProjectDTO cp)
         {
            
             C8orProject r= _mapper.Map<C8orProjectDTO, C8orProject>(cp);
@@ -27,7 +27,7 @@ namespace app.DLL.Repositories.Impl
         }
         public async Task<bool> UpdateC8orPjtStatus(int cpId,Status status)
         {
-            var existingCP = Context.C8orsProjects.First(x => x.Id == cpId);
+            var existingCP = Context.C8orsProjects.First(x => x.UserId == cpId);
             existingCP.status = status;
             return await Update(existingCP);
         }
@@ -35,7 +35,7 @@ namespace app.DLL.Repositories.Impl
         { 
               return new ServiceResponse<List<C8orProjectDTO>>
             {
-                Data = await Context.C8orsProjects.Where(x =>(x.Collabor8orId == c8orId && x.Direction==direction))
+                Data = await Context.C8orsProjects.Where(x =>(x.UserId == c8orId && x.Direction==direction))
                .Select(c => _mapper.Map<C8orProjectDTO>(c)).ToListAsync()
             };           
         }

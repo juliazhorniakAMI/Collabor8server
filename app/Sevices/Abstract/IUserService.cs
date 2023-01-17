@@ -10,10 +10,11 @@ namespace app.Sevices.Abstract
     {
         Task<ServiceResponse<List<UserDTO>>> GetAllUsers();
         Task<bool> CheckIfUserExists(string email, string password);
-        Task<ServiceResponse<UserDTO>> FindUser(string email, string password);
-        Task<bool> AddUser(UserDTO user);
+        Task<ServiceResponse<UserDTO>> Login(string email, string password);
+        Task<ServiceResponse<bool>> Register(UserDTO user);
         Task<bool> UpdateUser(UserDTO user);
         Task<bool> DeleteUser(int id);
+
 
     }
 }

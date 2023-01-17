@@ -19,9 +19,10 @@ namespace app.DLL.Repositories.Impl.Skill
         {
            _mapper = mapper  ;
         }
-        public async Task<bool> AddC8orSkill(int c8orId, int skillId)
+        public async Task<ServiceResponse<bool>> AddC8orSkill(int c8orId, int skillId)
         {
-           return await Add(new Models.C8orSkill(){C8orId=c8orId,SkillId=skillId});    
+        //    return await Add(new Models.C8orSkill(){UserId=c8orId,SkillId=skillId});    
+               return await Add(new Models.C8orSkill(){UserId=c8orId});    
         }
         public async Task<bool> DeleteC8orSkill(int id)
         {
@@ -32,7 +33,7 @@ namespace app.DLL.Repositories.Impl.Skill
         {
               return new ServiceResponse<List<C8orSkillDTO>>
             {
-                Data = await Context.C8orSkills.Where(x=>x.C8orId==c8or).Include(x=>x.Skill).Select(c => _mapper.Map<C8orSkillDTO>(c)).ToListAsync()
+                Data = await Context.C8orSkills.Where(x=>x.UserId==c8or).Include(x=>x.Skill).Select(c => _mapper.Map<C8orSkillDTO>(c)).ToListAsync()
             };
         }
     }
