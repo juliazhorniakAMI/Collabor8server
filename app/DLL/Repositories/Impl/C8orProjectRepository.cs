@@ -63,9 +63,8 @@ namespace app.DLL.Repositories.Impl
                .Select(c => _mapper.Map<C8orProjectDTO>(c)).ToListAsync()
             };           
         }
-        public async Task<bool> DeleteC8orProject(int id)
-        {
-            var p = await GetById(id);
+        public async Task<bool> DeleteC8orProject(int UserId,string sphereId,int pjtId)
+        {   var p = await Context.C8orsProjects.FirstAsync(x=>(x.UserId==UserId && x.SphereId==sphereId && x.ProjectId==pjtId));
             return await Delete(p);
         }
     }

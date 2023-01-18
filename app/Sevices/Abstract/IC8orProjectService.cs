@@ -16,6 +16,6 @@ namespace app.Sevices.Abstract
           Task<ServiceResponse<List<C8orProjectDTO>>> GetListProjectsForOneC8or(Direction direction,int c8orId);
           Task<ServiceResponse<List<C8orProjectDTO>>> GetListC8orsForOnePjt(Direction direction, int pId);
           Task<bool> UpdateC8orPjtStatus(int cpId,Status status);
-          Task<bool> DeleteC8orProject(int id);
+          Task<bool>DeleteC8orProject(int UserId,string sphereId,int pjtId);
     }
 }

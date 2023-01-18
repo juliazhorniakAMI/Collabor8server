@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using app.DLL.Models;
 using app.ModelsDTO;
+using app.ModelsDTO.C8or;
 using app.Sevices.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,7 +32,7 @@ namespace app.Controllers
         }
         
         [HttpPut("UpdateCollabor8orProfile")]
-        public async Task<ActionResult<bool>> UpdateC8or([FromBody]Collabor8orDTO c8or)
+        public async Task<ActionResult<bool>> UpdateC8or([FromBody]Collabor8orUpdateDTO c8or)
         {
             return Ok(await _c8orService.UpdateC8or(c8or));
         }
@@ -42,10 +43,10 @@ namespace app.Controllers
             return Ok(await _c8orService.AddC8or(c));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> DeleteC8or(int id)
+        [HttpDelete("{userId}/{sphere}")]
+        public async Task<ActionResult<bool>> DeleteC8or(int userId,string sphere)
         {
-            return Ok(await _c8orService.DeleteC8or(id));
+            return Ok(await _c8orService.DeleteC8or(userId,sphere));
         }
       
     }

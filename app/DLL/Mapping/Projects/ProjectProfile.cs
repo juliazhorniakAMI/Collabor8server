@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using app.DLL.Models;
 using app.ModelsDTO;
+using app.ModelsDTO.Projects;
 using AutoMapper;
 
 namespace app.DLL.Mapping
@@ -14,6 +15,8 @@ namespace app.DLL.Mapping
         {
             
             CreateMap<Project, ProjectDTO>().ReverseMap();
+              CreateMap<Project, ProjectDashboardDTO>().ReverseMap();
+          
         }
         
     }

@@ -14,9 +14,15 @@ namespace app.DLL.Mapping
         public C8orProjectProfile()
     {
          CreateMap<C8orProjectDTO, C8orProject>();
+           CreateMap<C8orProject,C8orProjectDashboardDTO>()
+              .ForMember(r => r.status, s => s.MapFrom(t => t.status.ToString()))
+               .ForMember(r => r.Direction, s => s.MapFrom(t => t.Direction.ToString())
+              );
         
           CreateMap<C8orProject,C8orProjectDTO>()
-              .ForMember(r => r.status, s => s.MapFrom(t => t.status.ToString()));
+              .ForMember(r => r.status, s => s.MapFrom(t => t.status.ToString()))
+               .ForMember(r => r.Direction, s => s.MapFrom(t => t.Direction.ToString())
+              );
     }
         
     }

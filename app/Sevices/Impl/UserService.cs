@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using app.DLL.Models;
 using app.DLL.Repositories.Abstract;
 using app.DTOs;
+using app.ModelsDTO.User;
 using app.Sevices.Abstract;
 namespace app.Sevices.Impl
 {
@@ -38,6 +39,10 @@ namespace app.Sevices.Impl
         public Task<bool> UpdateUser(UserDTO user)
         {
             return _Repository.UpdateUser(user);
+        }
+        public Task<ServiceResponse<UserDashboardDTO>> GetUser(int id)
+        {
+             return _Repository.GetUser(id);
         }
     }
 }
