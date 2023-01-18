@@ -56,10 +56,10 @@ namespace app.Controllers
             return Ok(await _cpService.UpdateC8orPjtStatus(cpId,status));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> DeleteC8orProject(int id)
+        [HttpDelete("Delete/{UserId}/{sphereId}/{pjtId}")]
+        public async Task<ActionResult<bool>> DeleteC8orProject(int UserId,string sphereId,int pjtId)
         {
-            return Ok(await _cpService.DeleteC8orProject(id));
+            return Ok(await _cpService.DeleteC8orProject(UserId, sphereId, pjtId));
         }
 
           

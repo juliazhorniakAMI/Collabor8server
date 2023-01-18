@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using app.DLL.Models;
 using app.DTOs;
+using app.ModelsDTO.User;
 using app.Sevices.Abstract;
 using Microsoft.AspNetCore.Mvc;
 namespace restapi.Controllers
@@ -36,6 +37,12 @@ namespace restapi.Controllers
             return Ok(await _userService.UpdateUser(user));
         }
 
+        [HttpGet("GetUser")]
+        public async Task<ActionResult<ServiceResponse<UserDashboardDTO>>> GetUser()
+        {
+            int id=1;
+            return Ok(await _userService.GetUser(id));
+        }
         [HttpGet("CheckIfUserExists/{email}/{password}")]
         public async Task<ActionResult<bool>> CheckIfUserExists(string email, string password)
         {

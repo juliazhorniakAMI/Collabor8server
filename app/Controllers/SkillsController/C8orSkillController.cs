@@ -26,16 +26,16 @@ namespace app.Controllers.SkillController
             return Ok(await _c8orskillService.GetAll(c8orId));
         }
 
-        [HttpPost("{c8orId}/{skillId}")]
-        public async Task<ActionResult<ServiceResponse<bool>>> AddC8orSkill(int c8orId,int skillId)
+        [HttpPost("AddC8orSkill")]
+        public async Task<ActionResult<ServiceResponse<bool>>> AddC8orSkill(C8orSkillDTO c)
         {
-            return Ok(await _c8orskillService.AddC8orSkill(c8orId,skillId));
+            return Ok(await _c8orskillService.AddC8orSkill(c));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> DeleteC8orSkill(int id)
+        [HttpDelete("DeleteC8orSkill")]
+        public async Task<ActionResult<bool>> DeleteC8orSkill(C8orSkillDTO c)
         {
-            return Ok(await _c8orskillService.DeleteC8orSkill(id));
+           return Ok(await _c8orskillService.DeleteC8orSkill(c));
         }
       
     }

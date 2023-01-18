@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using app.DLL.Models;
 using app.DLL.Models.Enums;
+using app.ModelsDTO.Projects;
 
 namespace app.ModelsDTO
 {
-    public class C8orProjectDTO
+    public class C8orProjectDashboardDTO
     {
          public int UserId { get; set; }
         public string SphereId { get; set; }
@@ -16,6 +17,6 @@ namespace app.ModelsDTO
         public string? AgreementURL { get; set; }
         public Direction Direction { get; set; } = Direction.Null;
         public Status status { get; set; } = Status.Null;
-        public virtual ProjectDTO? Project { get; set; }
+         public virtual ProjectDashboardDTO? Project { get; set; }
     }
 }

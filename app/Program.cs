@@ -39,6 +39,8 @@ builder.Services.AddTransient<IC8orProjectService,C8orProjectService>();
 builder.Services.AddTransient<IC8orProjectRepository,C8orProjectRepository>();
 builder.Services.AddTransient<IProjectSupportInfoService,ProjectSupportInfoService>();
 builder.Services.AddTransient<IProjectSupportInfoRepository,ProjectSupportInfoRepository>();
+builder.Services.AddTransient<ISphereSkillService,SphereSkillService>();
+builder.Services.AddTransient<ISphereSkillRepository,SphereSkillRepository>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 var app = builder.Build();

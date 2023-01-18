@@ -15,14 +15,13 @@ namespace app.Sevices.Impl.Skill
         {
             _Repository=Repository;       
         }
-        public Task<ServiceResponse<bool>> AddC8orSkill(int c8orId, int skillId)
+        public Task<ServiceResponse<bool>> AddC8orSkill(C8orSkillDTO c)
         {
-            return _Repository.AddC8orSkill(c8orId,skillId);
+            return _Repository.AddC8orSkill(c);
         }
-
-        public Task<bool> DeleteC8orSkill(int id)
+        public Task<bool> DeleteC8orSkill(C8orSkillDTO c)
         {
-           return _Repository.DeleteC8orSkill(id);
+             return _Repository.DeleteC8orSkill(c);
         }
 
         public Task<ServiceResponse<List<C8orSkillDTO>>> GetAll(int c8or)

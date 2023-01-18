@@ -7,7 +7,7 @@ namespace app.ModelsDTO
 {
     public class SkillDTO
     {
-       public int Id { get; set; }
-       public string? FullName { get; set; }
+       public string SkillId { get; set; }
+      
     }
 }

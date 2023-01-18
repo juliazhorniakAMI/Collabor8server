@@ -9,7 +9,7 @@ namespace app.Sevices.Abstract.Skill
     public interface IC8orSkillService
     {
         Task<ServiceResponse<List<C8orSkillDTO>>> GetAll(int c8or);
-        Task<ServiceResponse<bool>> AddC8orSkill(int c8orId,int skillId);
-        Task<bool> DeleteC8orSkill(int id);
+        Task<ServiceResponse<bool>> AddC8orSkill(C8orSkillDTO c);
+        Task<bool> DeleteC8orSkill(C8orSkillDTO c);
     }
 }

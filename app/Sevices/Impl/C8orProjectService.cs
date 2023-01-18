@@ -21,9 +21,9 @@ namespace app.Sevices.Impl
         {
             return _Repository.AddC8orProject(cp);
         }
-        public Task<bool> DeleteC8orProject(int id)
+        public Task<bool> DeleteC8orProject(int UserId,string sphereId,int pjtId)
         {
-            return _Repository.DeleteC8orProject(id);
+            return _Repository.DeleteC8orProject(UserId,sphereId,pjtId);
         }
         public Task<ServiceResponse<List<C8orProjectDTO>>> GetListC8orsForAllPjt(Direction direction, int userId)
         {

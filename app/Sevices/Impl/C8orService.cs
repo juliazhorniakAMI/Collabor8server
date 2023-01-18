@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using app.DLL.Models;
 using app.DLL.Repositories.Abstract;
 using app.ModelsDTO;
+using app.ModelsDTO.C8or;
 using app.Sevices.Abstract;
 
 namespace app.Sevices.Impl
@@ -24,13 +25,13 @@ namespace app.Sevices.Impl
         {
             return _Repository.GetC8orsByUserId(userId);
         }
-        public Task<bool> UpdateC8or(Collabor8orDTO c8or)
+        public Task<bool> UpdateC8or(Collabor8orUpdateDTO c8or)
         {
             return _Repository.UpdateC8or(c8or);
         }
-         public Task<bool> DeleteC8or(int id)
+         public Task<bool> DeleteC8or(int id,string sphere)
         {
-            return _Repository.DeleteC8or(id);
+            return _Repository.DeleteC8or(id,sphere);
         }
         public Task<ServiceResponse<List<Collabor8orDTO>>> GetAllCollabor8ors()
         {  

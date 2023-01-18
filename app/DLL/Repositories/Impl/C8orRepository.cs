@@ -6,6 +6,7 @@ using app.Context;
 using app.DLL.Models;
 using app.DLL.Repositories.Abstract;
 using app.ModelsDTO;
+using app.ModelsDTO.C8or;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,16 +32,17 @@ namespace app.DLL.Repositories.Impl
                 .Include(x => x.User).Select(c => _mapper.Map<Collabor8orDTO>(c)).ToListAsync()
             };       
         }
-          public async Task<bool> UpdateC8or(Collabor8orDTO c8or)
+          public async Task<bool> UpdateC8or(Collabor8orUpdateDTO c8or)
         { 
-            var existingC8or =  Context.Collabor8ors.First(x => x.Resume == c8or.UserName);
+            var existingC8or = await  Context.Collabor8ors.FirstAsync(x => x.UserId == c8or.UserId && x.SphereId==c8or.SphereId);
+            existingC8or.SphereId = c8or.SphereId;
             existingC8or.BackgroundSummary = c8or.BackgroundSummary;
             existingC8or.Resume = c8or.Resume;
             return await Update(existingC8or);
         }
-          public async Task<bool> DeleteC8or(int id)
+          public async Task<bool> DeleteC8or(int id,string sphere)
         {
-           var user = await GetById(id);
+           var user = await Context.Collabor8ors.FirstAsync(x=>(x.UserId==id && x.SphereId==sphere));
             return await Delete(user);
         }
         public async Task<ServiceResponse<List<Collabor8orDTO>>> GetAllCollabor8ors()

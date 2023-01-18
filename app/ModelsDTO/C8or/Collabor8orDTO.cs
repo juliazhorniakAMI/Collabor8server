@@ -9,7 +9,8 @@ namespace app.ModelsDTO
 {
     public class Collabor8orDTO
     {
-        public string UserName { get; set; }
+        public int UserId { get; set; }
+        public string? UserName { get; set; }
         public string SphereId { get; set; }
         public string? BackgroundSummary { get; set; }
         public string? Resume { get; set; }

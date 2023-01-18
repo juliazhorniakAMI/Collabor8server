@@ -19,16 +19,18 @@ namespace app.DLL.Repositories.Impl.Skill
         {
            _mapper = mapper  ;
         }
-        public async Task<ServiceResponse<bool>> AddC8orSkill(int c8orId, int skillId)
+        public async Task<ServiceResponse<bool>> AddC8orSkill(C8orSkillDTO c)
         {
-        //    return await Add(new Models.C8orSkill(){UserId=c8orId,SkillId=skillId});    
-               return await Add(new Models.C8orSkill(){UserId=c8orId});    
+            C8orSkill r= _mapper.Map<C8orSkillDTO, C8orSkill>(c);
+            return await Add(r); 
         }
-        public async Task<bool> DeleteC8orSkill(int id)
+
+        public async Task<bool> DeleteC8orSkill(C8orSkillDTO c)
         {
-             var cs = await GetById(id);
+            var cs = await Context.C8orSkills.FirstAsync(x=>(x.UserId==c.UserId && x.SphereId==c.SphereId && x.SkillId==c.SkillId));
             return await Delete(cs);
         }
+
         public async Task<Models.ServiceResponse<List<C8orSkillDTO>>> GetAll(int c8or)
         {
               return new ServiceResponse<List<C8orSkillDTO>>
