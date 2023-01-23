@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using app.ModelsDTO.Skills;
 
 namespace app.ModelsDTO.C8or
 {

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/walter/Collabor8/Collabor8server/app/app.csproj": {}
+    "/home/walter/Collabor8/Collabor8Server/app/app.csproj": {}
   },
   "projects": {
-    "/home/walter/Collabor8/Collabor8server/app/app.csproj": {
+    "/home/walter/Collabor8/Collabor8Server/app/app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/walter/Collabor8/Collabor8server/app/app.csproj",
+        "projectUniqueName": "/home/walter/Collabor8/Collabor8Server/app/app.csproj",
         "projectName": "app",
-        "projectPath": "/home/walter/Collabor8/Collabor8server/app/app.csproj",
+        "projectPath": "/home/walter/Collabor8/Collabor8Server/app/app.csproj",
         "packagesPath": "/home/walter/.nuget/packages/",
-        "outputPath": "/home/walter/Collabor8/Collabor8server/app/obj/",
+        "outputPath": "/home/walter/Collabor8/Collabor8Server/app/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/walter/.nuget/NuGet/NuGet.Config"
