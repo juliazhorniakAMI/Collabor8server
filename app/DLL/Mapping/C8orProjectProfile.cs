@@ -23,6 +23,7 @@ namespace app.DLL.Mapping
               .ForMember(r => r.status, s => s.MapFrom(t => t.status.ToString()))
                .ForMember(r => r.Direction, s => s.MapFrom(t => t.Direction.ToString())
               );
+          CreateMap<C8orProject,C8orProjectBrowseDTO>().ReverseMap();
     }
         
     }

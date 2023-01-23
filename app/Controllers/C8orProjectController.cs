@@ -45,15 +45,15 @@ namespace app.Controllers
         }
 
         [HttpPost("C8orProject")]
-        public async Task<ActionResult<ServiceResponse<bool>>> AddC8orProject([FromBody]C8orProjectDTO cp)
+        public async Task<ActionResult<ServiceResponse<bool>>> AddC8orProject([FromBody]C8orProjectBrowseDTO cp)
         {
             return Ok(await _cpService.AddC8orProject(cp));
         }
 
-        [HttpPut("UpdateStatus/{cpId}/{status}")]
-        public async Task<ActionResult<bool>> UpdateC8orPjtStatus(int cpId,Status status)
+        [HttpPut("UpdateC8orProject")]
+        public async Task<ActionResult<bool>> UpdateC8orPjt(C8orProjectDashboardDTO cp)
         {
-            return Ok(await _cpService.UpdateC8orPjtStatus(cpId,status));
+            return Ok(await _cpService.UpdateC8orPjt(cp));
         }
 
         [HttpDelete("Delete/{UserId}/{sphereId}/{pjtId}")]

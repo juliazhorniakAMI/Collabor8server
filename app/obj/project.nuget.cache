@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kPHmRvjDDmUoK+mrdt8F9wVI0XqRUE8TNedm+E10bQ1Qp+QL8j3G8VCPdGtSRx7MTsiqCYz5Po8CDf+AtczlwA==",
+  "dgSpecHash": "fs4j9wfhKcts6Ymj9x8yCxO+YL0pUI7M1+V4NRG8u3W32K74pWCseTAp2HvMDVqDO0Yyz8vwNlYE6jdUgb3CtQ==",
   "success": true,
-  "projectFilePath": "/home/walter/Collabor8/Collabor8server/app/app.csproj",
+  "projectFilePath": "/home/walter/Collabor8/Collabor8Server/app/app.csproj",
   "expectedPackageFiles": [
     "/home/walter/.nuget/packages/automapper/12.0.0/automapper.12.0.0.nupkg.sha512",
     "/home/walter/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

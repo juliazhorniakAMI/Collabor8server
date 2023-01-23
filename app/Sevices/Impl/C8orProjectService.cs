@@ -17,7 +17,7 @@ namespace app.Sevices.Impl
         {
             _Repository=Repository;       
         }
-        public Task<ServiceResponse<bool>> AddC8orProject(C8orProjectDTO cp)
+        public Task<ServiceResponse<bool>> AddC8orProject(C8orProjectBrowseDTO cp)
         {
             return _Repository.AddC8orProject(cp);
         }
@@ -45,9 +45,9 @@ namespace app.Sevices.Impl
             return _Repository.GetListProjectsForOneC8or( direction, c8orId);
         }
 
-        public Task<bool> UpdateC8orPjtStatus(int cpId,Status status)
+        public Task<bool> UpdateC8orPjt(C8orProjectDashboardDTO cp)
         {
-             return _Repository.UpdateC8orPjtStatus( cpId, status);
+             return _Repository.UpdateC8orPjt(cp);
         }
     }
 }
