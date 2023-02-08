@@ -9,8 +9,8 @@ using app.Sevices.Abstract;
 using Microsoft.AspNetCore.Mvc;
 namespace restapi.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+   [ApiController]
+    [Route("User")]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;

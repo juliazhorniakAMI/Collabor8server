@@ -10,7 +10,7 @@ using app.Sevices.Impl.Skill;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+//builder.Services.AddCors();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -43,15 +43,31 @@ builder.Services.AddTransient<ISphereSkillService,SphereSkillService>();
 builder.Services.AddTransient<ISphereSkillRepository,SphereSkillRepository>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+// wch - Added following code
+// https://learn.microsoft.com/en-us/answers/questions/1026379/access-to-fetch-been-blocked-by-cors-policy-react
+builder.Services.AddCors(options =>  
+    {  
+    options.AddDefaultPolicy(  
+        policy =>  
+        {  
+            policy.WithOrigins("http://localhost:3000")  
+                .AllowAnyHeader()  
+                .AllowAnyMethod();  
+        });  
+}); 
+// wch - Added previous code
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-app.UseSwagger();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+ app.UseSwagger();
 app.UseSwaggerUI();
-
-//app.UseHttpsRedirection();
-
 app.UseAuthorization();
+
+// wch - Added following code
+app.UseCors();  
+// wch - Added pervious code
 
 app.MapControllers();
 
