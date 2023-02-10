@@ -7,9 +7,13 @@ using app.DTOs;
 using app.ModelsDTO.User;
 using app.Sevices.Abstract;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+
 namespace restapi.Controllers
 {
-   [ApiController]
+    [Authorize]
+    [ApiController]
     [Route("User")]
     public class UserController : ControllerBase
     {
@@ -18,17 +22,25 @@ namespace restapi.Controllers
         {
             _userService = userService;
         }
-        
+
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<UserDTO>>>> GetAllUsers()
         {
             return Ok(await _userService.GetAllUsers());
         }
 
+        [AllowAnonymous]
         [HttpPost("Register")]
-        public async Task<ActionResult<ServiceResponse<bool>>> Register([FromBody]UserDTO user)
+        public async Task<ActionResult<ServiceResponse<bool>>> Register([FromBody] UserDTO user)
         {
-            return Ok(await _userService.Register(user));
+            var response = await _userService.Register(user);
+            if (!response.Success)
+            {
+
+                return BadRequest(response);
+
+            }
+            return Ok(response);
         }
 
         [HttpPut("UpdateUser")]
@@ -40,25 +52,32 @@ namespace restapi.Controllers
         [HttpGet("GetUser")]
         public async Task<ActionResult<ServiceResponse<UserDashboardDTO>>> GetUser()
         {
-            int id=1;
-            return Ok(await _userService.GetUser(id));
+            return Ok(await _userService.GetUser());
         }
-        [HttpGet("CheckIfUserExists/{email}/{password}")]
-        public async Task<ActionResult<bool>> CheckIfUserExists(string email, string password)
+        [HttpGet("CheckIfUserExists/{email}")]
+        public async Task<ActionResult<bool>> CheckIfUserExists(string email)
         {
-            return Ok(await _userService.CheckIfUserExists(email,password));
+            return Ok(await _userService.CheckIfUserExists(email));
         }
 
+        [AllowAnonymous]
         [HttpGet("Login/{email}/{password}")]
         public async Task<ActionResult<ServiceResponse<UserDTO>>> Login(string email, string password)
         {
-            return Ok(await _userService.Login(email,password));
+            var response = await _userService.Login(email, password);
+            if (!response.Success)
+            {
+
+                return BadRequest(response);
+
+            }
+            return Ok(response);
         }
 
-        [HttpDelete("DeleteUser/{id}")]
-        public async Task<ActionResult<bool>> DeleteUser(int id)
+        [HttpDelete("DeleteUser")]
+        public async Task<ActionResult<bool>> DeleteUser()
         {
-            return Ok(await _userService.DeleteUser(id));
+            return Ok(await _userService.DeleteUser());
         }
 
     }

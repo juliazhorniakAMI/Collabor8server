@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using app.Context;
 using app.DLL.Models;
@@ -15,20 +16,23 @@ namespace app.DLL.Repositories.Impl
     public class C8orRepository:  GenericKeyRepository<int, Collabor8or, DataContext>,IC8orRepository
     {
         private readonly IMapper _mapper;
-          public C8orRepository(DataContext context, IMapper mapper) : base(context)
+         private readonly IHttpContextAccessor _httpContextAccessor;
+          public C8orRepository(DataContext context, IMapper mapper,IHttpContextAccessor httpContextAccessor) : base(context)
         {
            _mapper = mapper  ;
+           _httpContextAccessor = httpContextAccessor;
         }
+         private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
         public async Task<ServiceResponse<bool>> AddC8or(Collabor8orDTO c)
         {
             Collabor8or r= _mapper.Map<Collabor8orDTO, Collabor8or>(c);
             return await Add(r);     
         }
-        public async Task<ServiceResponse<List<Collabor8orDTO>>> GetC8orsByUserId(int userId)
+        public async Task<ServiceResponse<List<Collabor8orDTO>>> GetC8orsByUserId()
         {
           return  new ServiceResponse<List<Collabor8orDTO>>
             {
-                Data = await Context.Collabor8ors.Where(x => x.UserId == userId)
+                Data = await Context.Collabor8ors.Where(x => x.UserId == GetUserId())
                 .Include(x => x.User).Select(c => _mapper.Map<Collabor8orDTO>(c)).ToListAsync()
             };       
         }
