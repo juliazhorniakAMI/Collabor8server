@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using app.DLL.Models;
 using app.DLL.Repositories.Abstract;
@@ -12,25 +13,24 @@ namespace app.Sevices.Impl
     public class UserService : IUserService
     {
          private readonly IUserRepository _Repository;
-        public UserService(IUserRepository Repository)
+         private readonly IHttpContextAccessor _httpContextAccessor;
+        public UserService(IUserRepository Repository,IHttpContextAccessor httpContextAccessor)
         {
-            _Repository=Repository;       
+            _Repository=Repository;    
+            _httpContextAccessor= httpContextAccessor;
         }
+
         public Task<ServiceResponse<bool>> Register(UserDTO user)
         {
           return _Repository.Register(user);
         }
-        public Task<bool> CheckIfUserExists(string email, string password)
+        public Task<bool> CheckIfUserExists(string email)
         {
-             return _Repository.CheckIfUserExists(email,password);
+             return _Repository.CheckIfUserExists(email);
         }
-        public Task<bool> DeleteUser(int id)
+        public Task<bool> DeleteUser()
         {
-            return _Repository.DeleteUser(id);
-        }
-        public Task<ServiceResponse<UserDTO>> Login(string email, string password)
-        {
-            return _Repository.Login(email,password);
+            return _Repository.DeleteUser();
         }
         public Task<ServiceResponse<List<UserDTO>>> GetAllUsers()
         {
@@ -40,9 +40,14 @@ namespace app.Sevices.Impl
         {
             return _Repository.UpdateUser(user);
         }
-        public Task<ServiceResponse<UserDashboardDTO>> GetUser(int id)
+        public Task<ServiceResponse<UserDashboardDTO>> GetUser()
         {
-             return _Repository.GetUser(id);
+             return _Repository.GetUser();
+        }
+
+        Task<ServiceResponse<string>> IUserService.Login(string email, string password)
+        {
+              return _Repository.Login(email,password);
         }
     }
 }

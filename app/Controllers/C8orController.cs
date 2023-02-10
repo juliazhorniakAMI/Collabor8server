@@ -6,10 +6,12 @@ using app.DLL.Models;
 using app.ModelsDTO;
 using app.ModelsDTO.C8or;
 using app.Sevices.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace app.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     public class C8orController : ControllerBase
     {
@@ -25,10 +27,10 @@ namespace app.Controllers
             return Ok(await _c8orService.GetAllCollabor8ors());
         }
         
-        [HttpGet("GetC8orsByUserId/{userId}")]
-        public async Task<ActionResult<ServiceResponse<List<Collabor8orDTO>>>> GetC8orsByUserId(int userId)
+        [HttpGet("GetC8orsByUserId")]
+        public async Task<ActionResult<ServiceResponse<List<Collabor8orDTO>>>> GetC8orsByUserId()
         {
-            return Ok(await _c8orService.GetC8orsByUserId(userId));
+            return Ok(await _c8orService.GetC8orsByUserId());
         }
         
         [HttpPut("UpdateCollabor8orProfile")]

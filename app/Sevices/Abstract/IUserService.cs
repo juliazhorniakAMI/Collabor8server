@@ -11,12 +11,12 @@ namespace app.Sevices.Abstract
     public interface IUserService
     {
         Task<ServiceResponse<List<UserDTO>>> GetAllUsers();
-        Task<bool> CheckIfUserExists(string email, string password);
-        Task<ServiceResponse<UserDTO>> Login(string email, string password);
+        Task<bool> CheckIfUserExists(string email);
+         Task<ServiceResponse<string>> Login(string email, string password);
         Task<ServiceResponse<bool>> Register(UserDTO user);
-        Task<ServiceResponse<UserDashboardDTO>> GetUser(int id);
+        Task<ServiceResponse<UserDashboardDTO>> GetUser();
         Task<bool> UpdateUser(UserDTO user);
-        Task<bool> DeleteUser(int id);
+        Task<bool> DeleteUser();
 
 
     }
