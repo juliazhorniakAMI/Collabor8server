@@ -27,11 +27,14 @@ namespace app.DLL.Repositories.Impl
             _httpContextAccessor= httpContextAccessor;
         }
         private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-        public async Task<bool> DeleteUser()
+        public async Task<bool> DeleteUser(int userId)
         {
-            var user = await GetById(GetUserId());
+            //for auth
+           // var user = await GetById(GetUserId());
+           var user = await GetById(userId);
             return await Delete(user);
-        }
+         
+        }  
         public async Task<ServiceResponse<List<UserDTO>>> GetAllUsers()
         {
             return new ServiceResponse<List<UserDTO>>
@@ -45,7 +48,9 @@ namespace app.DLL.Repositories.Impl
         }
         public async Task<bool> UpdateUser(UserDTO user)
         {
-            var existingUser = Context.Users.First(x => x.Id == GetUserId());
+            //for auth
+           // var existingUser = Context.Users.First(x => x.Id == GetUserId());
+           var existingUser = Context.Users.First(x => x.Id == user.Id);
 
             if (existingUser == null) return false;
             existingUser.Name = user.Name;
@@ -53,12 +58,14 @@ namespace app.DLL.Repositories.Impl
            // existingUser.Pass = user.Pass;
             return await Update(existingUser);
         }
-        public async Task<ServiceResponse<UserDashboardDTO>> GetUser()
+        public async Task<ServiceResponse<UserDashboardDTO>> GetUser(int userId)
         {
             var User = await Context.Users.
             Include(x => x.Collabor8ors).ThenInclude(x => x.C8orsProjects).ThenInclude(x => x.Project)
             .Include(x => x.Collabor8ors).ThenInclude(x => x.C8orSkill)
-            .Include(x => x.Founders).ThenInclude(x => x.Project).FirstAsync(x => x.Id ==GetUserId());
+            .Include(x => x.Founders).ThenInclude(x => x.Project).FirstAsync(x => x.Id ==userId);
+            //for auth
+            // .Include(x => x.Founders).ThenInclude(x => x.Project).FirstAsync(x => x.Id ==GetUserId());
             return new ServiceResponse<UserDashboardDTO>
             {
                 Data = _mapper.Map<UserDashboardDTO>(User)
@@ -67,8 +74,9 @@ namespace app.DLL.Repositories.Impl
 
        public async Task<ServiceResponse<string>> Login(string email, string password)
         {
+            
              var response = new ServiceResponse<string>();
-              User user = await Context.Users.FirstOrDefaultAsync(c => c.Email == email);
+             User user = await Context.Users.FirstOrDefaultAsync(c => c.Email == email);
             if (user is null)
             {
                 response.Success = false;
@@ -80,8 +88,13 @@ namespace app.DLL.Repositories.Impl
                 response.Message = "Wrong password";
             }
             else{
+            // wch - the following code is needed for authorization  
+            // ------------------------------------------------------
+               response.Data = CreateToken(user);
+            //    response.Data =user.Id.ToString();
+            // wch - the previous code is needed for authorization  
+            // ------------------------------------------------------
 
-                response.Data = CreateToken(user);
             }
             return response;
         }
@@ -146,7 +159,7 @@ namespace app.DLL.Repositories.Impl
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
 
-           return tokenHandler.WriteToken(token);
+            return tokenHandler.WriteToken(token);
 
         }
     }

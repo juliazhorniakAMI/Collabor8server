@@ -10,8 +10,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace app.Controllers
-{
+{    
+// wch - the following code is needed for authorization  
+// ------------------------------------------------------
     [Authorize]
+// wch - the previous code is needed for authorization  
+// ------------------------------------------------------
+
     [Route("[controller]")]
     public class C8orController : ControllerBase
     {
@@ -27,10 +32,10 @@ namespace app.Controllers
             return Ok(await _c8orService.GetAllCollabor8ors());
         }
         
-        [HttpGet("GetC8orsByUserId")]
-        public async Task<ActionResult<ServiceResponse<List<Collabor8orDTO>>>> GetC8orsByUserId()
+        [HttpGet("GetC8orsByUserId/{userId}")]
+        public async Task<ActionResult<ServiceResponse<List<Collabor8orDTO>>>> GetC8orsByUserId(int userId)
         {
-            return Ok(await _c8orService.GetC8orsByUserId());
+            return Ok(await _c8orService.GetC8orsByUserId(userId));
         }
         
         [HttpPut("UpdateCollabor8orProfile")]

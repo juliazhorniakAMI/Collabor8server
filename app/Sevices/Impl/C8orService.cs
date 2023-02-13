@@ -21,9 +21,9 @@ namespace app.Sevices.Impl
         {
            return _Repository.AddC8or(c);
         }
-        public  Task<ServiceResponse<List<Collabor8orDTO>>> GetC8orsByUserId()
+        public  Task<ServiceResponse<List<Collabor8orDTO>>> GetC8orsByUserId(int userId)
         {
-            return _Repository.GetC8orsByUserId();
+            return _Repository.GetC8orsByUserId(userId);
         }
         public Task<bool> UpdateC8or(Collabor8orUpdateDTO c8or)
         {

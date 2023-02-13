@@ -9,10 +9,17 @@ using app.Sevices.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace restapi.Controllers
 {
+// wch - the following code is needed for authorization  
+// ------------------------------------------------------
     [Authorize]
+// wch - the previous code is needed for authorization  
+// ------------------------------------------------------
+
     [ApiController]
     [Route("User")]
     public class UserController : ControllerBase
@@ -49,10 +56,10 @@ namespace restapi.Controllers
             return Ok(await _userService.UpdateUser(user));
         }
 
-        [HttpGet("GetUser")]
-        public async Task<ActionResult<ServiceResponse<UserDashboardDTO>>> GetUser()
+        [HttpGet("GetUser/{userId}")]
+        public async Task<ActionResult<ServiceResponse<UserDashboardDTO>>> GetUser(int userId)
         {
-            return Ok(await _userService.GetUser());
+            return Ok(await _userService.GetUser(userId));
         }
         [HttpGet("CheckIfUserExists/{email}")]
         public async Task<ActionResult<bool>> CheckIfUserExists(string email)
@@ -72,12 +79,13 @@ namespace restapi.Controllers
 
             }
             return Ok(response);
+           
         }
 
-        [HttpDelete("DeleteUser")]
-        public async Task<ActionResult<bool>> DeleteUser()
+        [HttpDelete("DeleteUser/{userId}")]
+        public async Task<ActionResult<bool>> DeleteUser(int userId)
         {
-            return Ok(await _userService.DeleteUser());
+            return Ok(await _userService.DeleteUser(userId));
         }
 
     }

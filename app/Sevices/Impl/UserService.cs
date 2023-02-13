@@ -28,9 +28,9 @@ namespace app.Sevices.Impl
         {
              return _Repository.CheckIfUserExists(email);
         }
-        public Task<bool> DeleteUser()
+        public Task<bool> DeleteUser(int userId)
         {
-            return _Repository.DeleteUser();
+            return _Repository.DeleteUser(userId);
         }
         public Task<ServiceResponse<List<UserDTO>>> GetAllUsers()
         {
@@ -40,14 +40,15 @@ namespace app.Sevices.Impl
         {
             return _Repository.UpdateUser(user);
         }
-        public Task<ServiceResponse<UserDashboardDTO>> GetUser()
+        public Task<ServiceResponse<UserDashboardDTO>> GetUser(int userId)
         {
-             return _Repository.GetUser();
+             return _Repository.GetUser(userId);
         }
 
         Task<ServiceResponse<string>> IUserService.Login(string email, string password)
         {
               return _Repository.Login(email,password);
         }
+
     }
 }

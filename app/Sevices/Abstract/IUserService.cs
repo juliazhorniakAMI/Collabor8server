@@ -14,10 +14,9 @@ namespace app.Sevices.Abstract
         Task<bool> CheckIfUserExists(string email);
          Task<ServiceResponse<string>> Login(string email, string password);
         Task<ServiceResponse<bool>> Register(UserDTO user);
-        Task<ServiceResponse<UserDashboardDTO>> GetUser();
+        Task<ServiceResponse<UserDashboardDTO>> GetUser(int userId);
         Task<bool> UpdateUser(UserDTO user);
-        Task<bool> DeleteUser();
-
+        Task<bool> DeleteUser(int userId);
 
     }
 }

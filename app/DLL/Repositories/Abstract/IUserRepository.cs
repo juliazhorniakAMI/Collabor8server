@@ -15,8 +15,8 @@ namespace app.DLL.Repositories.Abstract
         Task<ServiceResponse<string>> Login(string email, string password);
         Task<ServiceResponse<bool>> Register(UserDTO user);
         Task<bool> UpdateUser(UserDTO user);
-        Task<ServiceResponse<UserDashboardDTO>> GetUser();
-        Task<bool> DeleteUser();
+        Task<ServiceResponse<UserDashboardDTO>> GetUser(int userId);
+        Task<bool> DeleteUser(int userId);
 
     }
 }

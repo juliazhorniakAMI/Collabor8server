@@ -100,3 +100,14 @@ C:/Users/MacBook/Desktop/collabor8/test/app/bin/Debug/net6.0/Npgsql.EntityFramew
 /home/walter/Collabor8/Collabor8server/app/obj/Debug/net6.0/ref/app.dll
 /home/walter/Collabor8/Collabor8server/app/obj/Debug/net6.0/app.pdb
 /home/walter/Collabor8/Collabor8server/app/obj/Debug/net6.0/app.genruntimeconfig.cache
+/home/walter/Collabor8/Collabor8Server/app/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/walter/Collabor8/Collabor8Server/app/bin/Debug/net6.0/Microsoft.IdentityModel.Abstractions.dll
+/home/walter/Collabor8/Collabor8Server/app/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/walter/Collabor8/Collabor8Server/app/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+/home/walter/Collabor8/Collabor8Server/app/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+/home/walter/Collabor8/Collabor8Server/app/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/walter/Collabor8/Collabor8Server/app/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
+/home/walter/Collabor8/Collabor8Server/app/bin/Debug/net6.0/Scrutor.dll
+/home/walter/Collabor8/Collabor8Server/app/bin/Debug/net6.0/Swashbuckle.AspNetCore.Filters.dll
+/home/walter/Collabor8/Collabor8Server/app/bin/Debug/net6.0/Swashbuckle.AspNetCore.Filters.Abstractions.dll
+/home/walter/Collabor8/Collabor8Server/app/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
